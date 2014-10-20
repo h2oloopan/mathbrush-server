@@ -1,0 +1,271 @@
+@root    E
+@complete E
+
+PE :s: lparen <R> [RT] <R> rparen
+      {PAREN(\(,%2,\))}
+      `<mfenced open='(' close=')'>%2</mfenced>`
+      `\left( %2 \right)` ;
+
+FENCED :: [PE] ;
+#FENCED :s: lbrace <R> [RT] <R> rbrace
+#      {PAREN(\{,%2,\})}
+#      `<mfenced open='{' close='}'>%2</mfenced>`
+#      `\left\{ %2 \right\}` ;
+#FENCED :s: lbracket <R> [RT] <R> rbracket
+#      {PAREN(\[,%2,\])}
+#      `<mfenced open='[' close=']'>%2</mfenced>`
+#      `\left[ %2 \right]` ;
+
+ROOT :g: sqrt$ <C:sg> [RT] {ROOT(!%2)} `<msqrt>%1</msqrt>` `\sqrt{%1}` ;
+
+E :: [RE] | [RT] ;
+
+RELOP :: eq `=` `=` | leq `&lt;=` `\leq` | geq `>=` `\geq` | lt `&lt;` `<` | gt `>` `>` | neq `!=` `\neq` ;
+RELOP :g: horzline <B> horzline {_SYMBOL(eq)} `=` `=` rc(centered) ;
+RELOP :g: horzline <B> lt {_SYMBOL(leq)} `&lt;=` `\leq` rc(big-centered) ;
+RELOP :g: horzline <B> gt {_SYMBOL(geq)} `&gt;=` `\geq` rc(big-centered) ;
+
+RE :s: [RT] <R> [RELOP] <R> [E]
+      {REL(%1,%3,%2)}
+      `<mrow>%1<mo>%3</mo>%2</mrow>`
+      `%1 %3 %2` ;
+
+RT :: [AE] | [AT0] ;
+
+ADDOP :: plus `+` `+` | horzline `-` `-` | [PLUSMINUS] ;
+PLUSMINUS :: plusorminus ;
+PLUSMINUS :g: plus <B> horzline {_SYMBOL(plusorminus)} `&PlusMinus;` `\pm` rc(big-centered) ;
+
+AE :s: [AT0] <R> [ADDOP] <R> [RT]
+      {ADD(%1,%3,%2)}
+      `<mrow>%1<mo>%3</mo>%2</mrow>`
+      `%1 %3 %2` ;
+
+AT0 :: [AT] | [NEG] ;
+
+NEG :s: horzline <R> [AT]
+       {NEG(!%2)}
+       `<mrow><mo>-</mo>%1</mrow>`
+       `-%1` ;
+
+AT :: [MULT] | [NUM] | [MULT_TRAIL] ;
+
+MULT :s: [MT0] <R> [MULT_RHS]
+        {MULT(%1,%2,%0)}
+        `<mrow>%1<mo>&InvisibleTimes;</mo>%2</mrow>`
+        `%1 %2` ;
+MULT :s: [MT0] <R> asterisk <R> [ASTMULT_RHS]
+         {MULT(%1,%3,%2)}
+				 `<mrow>%1<mo>*</mo>%2</mrow>`
+				 `%1 * %2` ;
+
+MT0 :: [MT] | [NUM] ;
+
+MULT_TRAIL :: [MT] | [INT] | [SUM] | [LIMIT] ;
+ASTMULT_TRAIL :: [MULT_TRAIL] | [NUM] ;
+
+MULT_RHS :: [MULT2] | [MULT_TRAIL] ;
+ASTMULT_RHS :: [MULT] | [ASTMULT_TRAIL] ;
+
+MULT2 :s: [MT] <R> [MULT_RHS]
+         {MULT(%1,%2,%0)}
+         `<mrow>%1<mo>&InvisibleTimes;</mo>%2</mrow>`
+         `%1 %2` ;
+
+FR :g: [RT] <B:gs> ^horzline$ <B:sg> [RT]
+      {FRAC(%1,%3)}
+      `<mfrac>%1%2</mfrac>`
+      `\frac{%1}{%2}` ;
+
+MT :: [V] | [FR] | [SUP] | [ROOT] ; # | [DOTS] ;
+
+FN :s: [AUTO_N] <R> [AT]
+      {FN(%1,%2)}
+      `<mrow>%1<mo>&ApplyFunction;</mo><mrow>%2</mrow></mrow>`
+      `%1 %2` ;
+
+FN :s: [FN_LEFT] <R> [PE]
+      {FN(%1,%2)}
+      `<mrow>%1<mo>&ApplyFunction;</mo>%2</mrow>`
+      `%1 %2` ;
+
+FN_NAME :: [VAR_EXPR] | [AUTO_N] ;
+FN_LEFT :: [FN_NAME] | [FN_SUP] | [FN_PRIME] ;
+#FN_LEFT :: [N] | [FN_PRIME] ;
+
+PRIMES :: prime {_TERMINAL(1)} `<mo>&prime;</mo>` `'`
+        | prime <R> prime {_TERMINAL(2)} `<mo>&Prime;</mo>` `''` ;
+#        | prime <R> prime <R> prime {_TERMINAL(3)} `<mi>&prime;&prime;&prime;</mi>`
+#        ;
+
+FN_SUP :g: [FN_NAME]$ <AR:sg> [RT]
+         {SUP(%1,%2)}
+         `<msup>%1%2</msup>`
+         `%1^{%2}` ;
+
+SUP :g: [SUP_BASE]$ <AR:sg> [RT]
+       {SUP(%1,%2)}
+       `<msup>%1%2</msup>`
+       `%1^{%2}` ;
+
+SUP_BASE :: [V] | [ROOT] | [NUM] ;
+
+FN_PRIME :g: [VAR_EXPR]$ <AR:sg> [PRIMES]
+            {PRIME(%1,%2)}
+            `<msup>%1%2</msup>`
+            `%1 %2` ;
+
+NAME_CANONICAL :: [L] {NAME*(!%1)} `<mi>%1</mi>` `%1` ;
+
+AUTO_N :: [SIN] {NAME(!sin)} `<mi>sin</mi>` `\sin` ;
+AUTO_N :: [COS] {NAME(!cos)} `<mi>cos</mi>` `\cos` ;
+AUTO_N :: [TAN] {NAME(!tan)} `<mi>tan</mi>` `\tan` ;
+AUTO_N :: [EXP] {NAME(!exp)} `<mi>exp</mi>` `\exp` ;
+AUTO_N :: [LOG] {NAME(!log)} `<mi>log</mi>` `\log` ;
+AUTO_N :: [LN] {NAME(!ln)} `<mi>ln</mi>` `\ln` ;
+
+Cc :: C | c ;
+Oo :: O | o ;
+Ss :: S | s ;
+Xx :: X | x ;
+
+I :: i ;
+I :g: dot <B> [IBOT] {_SYMBOL(i)} rc(half-ascender) ;
+IBOT :: 1 | iota | lparen ;
+J :: j ;
+J :g: dot <B> jota {_SYMBOL(j)} rc(half-ascender-descender) ;
+IJ :: [I] | [J] ;
+
+SIN :s: [Ss] <R> [IJ] <R> n ;
+COS :s: [Cc] <R> [Oo] <R> [Ss] ;
+TAN :s: t <R> a <R> n ;
+EXP :s: e <R> [Xx] <R> p ;
+LOG :s: l <R> [Oo] <R> g ;
+LN :s: l <R> n ;
+
+N :: [NCOLLECT] {VAR(!%1)} `<mi>%1</mi>` `%1` ;
+
+NCOLLECT :: [L] {_TERMINAL(%1)} `%1` `%1` ;
+NCOLLECT :s: [L] <R> [NCOLLECT] {_TERMINAL(%1%2)} `%1` `%1` ;
+
+CONSTANT :: [PI] | e ;
+
+VARL :: a | b | c | d | f | g | h | [I] | [J] | k | l | m
+   | n | o | p | q | r | s | t | u | v | w | x | y | z
+   | A | B | C | D | E | F | G | H | I | J | K | L | M
+   | N | O | P | Q | R | S | T | U | V | W | X | Y | Z
+   | alpha `&alpha;` `\alpha` | beta `&beta;` `\beta` | gamma `&gamma;` `\gamma`
+   | delta `&delta;` `\delta` | epsilon `&epsilon;` `\epsilon`
+   | sigma `&sigma;` `\sigma` | theta `&theta;` `\theta` | lambda `&lambda;` `\lambda`
+   | mu `&mu;` `\mu` | phi `&phi;` `\phi` | psi `&psi;` `\psi` | rho `&rho;` `\rho`
+   | tau `&tau;` `\tau` | xi `&xi;` `\xi` | zeta `&zeta;` `\zeta` | Delta `&Delta;` `\Delta`
+   | Gamma `&Gamma;` `\Gamma` | Omega `&Omega;` `\Omega` | [PICAP] | Sigma `&Sigma;` `\Sigma`
+   ;
+
+L :: [VARL] | [CONSTANT] ;
+
+PICAP :: Pi | [PICAPMULTI] ;
+PICAPMULTI :g: horzline <B:sg> [PICAPBOT] {_SYMBOL(Pi)} rc(ascender) ;
+PI :: pi | [PIMULTI] ;
+PIMULTI :g: horzline <B:sg> [PIBOT] {_SYMBOL(pi)} rc(baseline) ;
+PICAPBOT :g: 1 <R> 1 ;
+PIBOT :: [PICAPBOT] ;
+PIBOT :g: 1 <R> iota ;
+
+V :: [VAR_EXPR] | [FN] | [FENCED] | [MATRIX] ;
+
+SUB_BASE :: [NUM] | [VAR_EXPR] ;
+
+CONSTVAR :: [CONSTANT] {NUM(!%1)} `<mi>%1</mi>` `%1` ;
+VAR_EXPR :: [VAR] | [SUBSCRIPT] | [CONSTVAR] ;
+
+VAR :: [VARL]
+       {VAR(!%1)}
+       `<mi>%1</mi>` `%1` ;
+
+SUBSCRIPT :g: [VAR] <BR:sg> [SUB_BASE]
+             {SUBSCR(%1,%2)}
+             `<msub>%1%2</msub>` `%1_{%2}` ;
+
+INT :: [INDEF_INT] | [DEF_INT_LO] | [DEF_INT_HI] | [DEF_INT] ;
+INDEF_INT :s: Integral <R> [RT] <R> d <R> [VAR_EXPR]
+             {INTEGRAL(%0,%0,%2,%4)}
+             `<mrow><mo>&Integral;</mo>%3<mo>&InvisibleTimes;</mo><mrow><mo>&DifferentialD;</mo>%4</mrow></mrow>`
+             `\int %3 d %4` ;
+DEF_INT_LO :s: [INTL_LO] <R> [RT] <R> d <R> [VAR_EXPR]
+              {INTEGRAL(%1:1,%0,%2,%4)}
+              `<mrow><munder><mo>&Integral;</mo>%1</munder>%3<mo>&InvisibleTimes;</mo><mrow><mo>&DifferentialD;</mo>%4</mrow></mrow>`
+              `\int_{%1} %3 d %4` ;
+DEF_INT_HI :s: [INTL_HI] <R> [RT] <R> d <R> [VAR_EXPR]
+              {INTEGRAL(%0,%1:1,%2,%4)}
+              `<mrow><mover><mo>&Integral;</mo>%2</mover>%3<mo>&InvisibleTimes;</mo><mrow><mo>&DifferentialD;</mo>%4</mrow></mrow>`
+              `\int^{%1} %3 d %4` ;
+DEF_INT :s: [INTL] <R> [RT] <R> d <R> [VAR_EXPR]
+           {INTEGRAL(%1:1,%1:2,%2,%4)}
+           `<mrow><munderover><mo>&Integral;</mo>%1%2</munderover>%3<mo>&InvisibleTimes;</mo><mrow><mo>&DifferentialD;</mo>%4</mrow></mrow>`
+           `\int_{%1}^{%2} %3 d %4` ;
+INTL_LO :s: Integral$ <B:sg> [RT] {(!%2)} ;
+INTL_LO :s: Integral$ <BR:sg> [RT] {(!%2)} ;
+INTL :s: [RT] <B:gs> ^Integral$ <B:sg> [RT] {(%3,%1)} ;
+INTL :s: [INTL_HI]$ <BR:sg> [RT] {(%2,%1:1)} ;
+INTL_HIAR :s: Integral$ <AR:sg> [RT] {(!%2)} ;
+INTL_HI :s: [RT] <B:gs> ^Integral {(!%1)} ;
+INTL_HI :: [INTL_HIAR] ;
+
+
+SUM :: [INDEF_SUM] | [DEF_SUM_LO] | [DEF_SUM] ;
+INDEF_SUM :s: Sigma <R> [RT]
+       {SUM(%0,%0,%2)}
+       `<mrow><mo>&Sum;</mo>%3</mrow>`
+       `\sum %3` ;
+DEF_SUM_LO :s: [SUML_LO] <R> [RT]
+              {SUM(%1:1,%0,%2)}
+              `<mrow><munder><mo>&Sum;</mo>%1</munder>%3</mrow>`
+              `\sum_{%1} %3` ;
+DEF_SUM :s: [SUML] <R> [RT]
+           {SUM(%1:1,%1:2,%2)}
+           `<mrow><munderover><mo>&Sum;</mo>%1%2</munderover>%3</mrow>`
+           `\sum_{%1}^{%2} %3` ;
+SUML_LO :s: Sigma$ <B:sg> [E] {(!%2)} ;
+SUML :s: [RT] <B:gs> ^Sigma$ <B:sg> [E] {(%3,%1)} ;
+
+LIMIT :s: [LIMLHS] <R> [RT]
+         {LIMIT(%1:1,%1:2,%2)}
+         `<mrow><munder><mi>lim</mi><mrow>%1<mo>&RightArrow;</mo>%2</mrow></munder>%3</mrow>`
+         `\lim_{%1 \rightarrow %2} %3` ;
+
+LIMLHS :s: [LIM]$ <B:gg> [LIMAPP] {(%2:1,%2:2)} ;
+LIM :: l <R> [I] <R> m {_TERMINAL(lim)} ;
+LIMAPP :: [VAR_EXPR] <R> arrow <R> [RT] {(%1,%3)} ;
+
+NUM :: [INTEGER] {NUM(!%1)} `<mn>%1</mn>` `%1`
+     | [F] {NUM(!%1)} `<mn>%1</mn>` `%1`
+     | infin {NUM(!%1)} `<mn>&infin;</mn>` `\infty` ;
+	  
+INTEGER :: [DIGIT] {_TERMINAL(%1)} ;
+INTEGER :s: [DIGIT1] <R> [INTEGER_TAIL] {_TERMINAL(%1%2)} ;
+INTEGER_TAIL :: [DIGIT] {_TERMINAL(%1)} ;
+INTEGER_TAIL :s: [DIGIT] <R> [INTEGER_TAIL] {_TERMINAL(%1%2)} ;
+
+F0 :s: [INTEGER]$ <BR:ss> dot {_TERMINAL(%1)} ;
+F :s: [F0] <R:ss> [INTEGER_TAIL]$ {_TERMINAL(%1.%2)} ;
+
+DIGIT2 :: 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 ;
+DIGIT1 :: 1 | [DIGIT2] ;
+DIGIT :: 0 | [DIGIT1] ;
+
+DOTS :: [HDOTS] | [VDOTS] | [DDOTS] | [MDDOTS] ;
+HDOTS :: dot <R> dot <R> dot {DOTS(!&hellip;)} `<mi>&hellip;</mi>` `\cdots` ;
+VDOTS :: dot <B> dot <B> dot {DOTS(!&vellip;)} `<mi>&vellip;</mi>` `\vdots` ;
+DDOTS :: dot <BR> dot <BR> dot {DOTS(!&dtdot;)} `<mi>&dtdot;</mi>` `\ddots` ;
+MDDOTS :: dot <AR> dot <AR> dot {DOTS(!&utdot;)} `<mi>&utdot;</mi>` `\iddots` ;
+
+MATRIX :s: lbracket <R> [MX] <R> rbracket
+          {PAREN(\[,%2,\])}
+          `<mfenced open='[' close=']'>%2</mfenced>` `\begin{bmatrix} %2 \end{bmatrix}` ;
+
+MX :: [!MATRIX]
+      {MATRIX(%1:1'MATRIX_NUMROWS', %1:2'MATRIX_NUMCOLS', %1:3'MATRIX_ROWS')}
+      `<mtable>%3</mtable>` `%3` ;
+
+LIST :: [E] <R> comma <R> [E] {LIST*(%#)} `<mrow>@join(<mo>,</mo>)</mrow>` `@join(,)` ;

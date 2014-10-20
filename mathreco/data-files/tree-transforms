@@ -1,0 +1,29 @@
+(NUM (TERM 1)) :: (SUP (VAR (TERM )) (NUM (TERM 0)))
+(NUM (TERM 1)) :: (SUP (SUBSCR (VAR (TERM )) (NUM (TERM ))) (NUM (TERM 0)))
+(VAR (TERM )) :: (SUP (%) (NUM (TERM 1)))
+(VAR (TERM )) :: (MULT (%) (SUP (VAR (TERM )) (NUM (TERM 0))))
+(VAR (TERM )) :: (ADD (%) (NUM (TERM 0)))
+(VAR (TERM )) :: (ADD (NUM (TERM 0)) (%))
+(VAR (TERM )) :: (MULT (%) (NUM (TERM 1)))
+(VAR (TERM )) :: (MULT (NUM (TERM 1)) (%))
+(SUBSCR (VAR (TERM )) (NUM (TERM ))) :: (SUP (%) (NUM (TERM 1)))
+(SUBSCR (VAR (TERM )) (NUM (TERM ))) :: 
+	(MULT
+		(%)
+		(SUP
+			(%)
+			(NUM (TERM 0))
+		)
+	)
+(SUBSCR (VAR (TERM )) (NUM (TERM ))) ::
+	(ADD 
+		(%)
+		(NUM (TERM 0))
+	)
+(SUBSCR (VAR (TERM )) (NUM (TERM ))) ::
+	(ADD
+		(NUM (TERM 0))
+		(%)
+	)
+(SUBSCR (VAR (TERM )) (NUM (TERM ))) :: (MULT (%) (NUM (TERM 1)))
+(SUBSCR (VAR (TERM )) (NUM (TERM ))) :: (MULT (NUM (TERM 1)) (%))

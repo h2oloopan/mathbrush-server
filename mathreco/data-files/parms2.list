@@ -1,0 +1,70 @@
+/ line format is as follows:
+// lines beginning with "//" are comments.
+// lines defining parameters are:
+// type name default min max
+
+// relation.cc
+double FreeRelationDist 0.5 0.0 1.0
+
+// meas.h
+double MinStrokeSize 0.03125 0.0 1.0
+
+// parser.cc
+double ScoreThreshold 0.00 0.0 1.0
+
+// norm.cc
+double NormalizationScale 1.0 1.0 100.0
+
+// symbols.cc
+double PrototypeClusteringThreshold 0.1 0.25 1.5
+double CorrelationThreshold 0.05 0.0 1.0
+
+// treewalk.cc
+unsigned NumTerminalPreviews 10 6 6
+unsigned NumNonTerminalPreviews 3 3 3
+
+
+// interp.h
+double CuspLowerBound 1.570696 0.0 2.0
+double CuspUpperBound 4.712389 4.0 6.283185
+double InterpArclengthRatio 0.08 0.01 0.2
+
+// match.h
+unsigned DefaultNumMatches 5 1 10
+
+// segment.h
+unsigned MaxGroupSize 5 1 10
+unsigned DefaultMaxSegmentSize 4 1 10
+double SplitDistance 0.0625 100 400
+double MaxSplitDistance 0.125 50 200
+double MinSplitDistance 0.0625 50 200
+double MaxMergeDistance 0.03 50 200
+
+// elastic.cpp
+double PositionWeight 180.0 30.0 720.0
+
+// recog.cpp
+unsigned NumMatchesPerSegment 4 10 10
+double FeatureConsiderationThreshold 0.25 50.0 200.0
+double HighHeuristicWeight 10.0 0.0 20.0
+double MediumHeuristicWeight 7.0 0.0 20.0
+double LowHeuristicWeight 4.0 0.0 20.0
+double TimingWeight 15.0 0.0 40.0
+double PenliftStabilityRatio 1.05 1.0 5.0
+double SmallSymbolThreshold 0.125 0 1
+
+// segment.cpp
+double DistanceThresholdRatio 0.35 0.1 1.0
+double ForceDistanceRatio 0.5 0.0 1.0
+double TouchingRatio 0.5 0.0 1.0
+double ProximityMinBboxOverlap 0.75 0.0 1.0
+double ProximityMediumBboxOverlap 0.8 0.0 1.0
+double ProximityHighBboxOverlap 0.9 0.0 1.0
+double MaxDotSize 0.1 0 1000
+double StackOverlapRequiredRatio 0.4 0.0 1.0
+double StackedDotMaxHorzDist 0.125 0 500
+double StackOverlapHighRatio 1.25 1.0 2.0
+
+// gridnorm.cc
+unsigned DefaultGridRows 4 1 8
+unsigned DefaultGridCols 2 1 7

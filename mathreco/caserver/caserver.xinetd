@@ -1,0 +1,10 @@
+service caserver
+{
+	socket_type = stream
+	protocol = tcp
+	user = smaclean
+	server = /home/smaclean/src/mathreco/caserver/caserver
+	port = 22222
+	wait = no
+	per_source = 1
+}

@@ -1,0 +1,408 @@
+@root SINGLE
+@partial E_
+@complete E
+@single SINGLE
+@matrix_cell SINGLE
+
+SINGLE :: [E] | [E_] ; 
+
+
+PE_HEAD_ :s: lparen {PAREN(\(,%?,%?)}
+             `<mfenced open='(' close=''></mfenced>` `(` ;
+PE_HEAD2_ :s: [PE_HEAD_] <R> [RT_] {PAREN(\(,%2,%?)}
+              `<mfenced open='(' close=''>%2</mfenced>` `( %2` ;
+PE_HEADC_ :s: [PE_HEAD_] <R> [RT] {PAREN(\(,%2,%?)}
+              `<mfenced open='(' close=''>%2</mfenced>` `( %2` ;
+
+PE :s: [PE_HEADC_] <R> rparen {PAREN*(\(,%1:2,\))}
+      `<mfenced open='(' close=')'>%2</mfenced>` `\left( %2 \right)` ;
+PE_ :s: [PE_HEAD_] | [PE_HEAD2_] | [PE_HEADC_] ;
+
+FENCED :s: [PE] ;
+FENCED_ :s: [PE_] ;
+
+ROOT_HEAD_ :: sqrt {ROOT(!%?)} `<msqrt></msqrt>` `\sqrt` ;
+ROOT_HEAD2_ :g: sqrt$ <C:sg> [RT_] {ROOT(!%2)}
+                `<msqrt>%1</msqrt>` `\sqrt{%1}` ;
+ROOT :g: sqrt$ <C:sg> [RT] {ROOT*(!%2)} `<msqrt>%1</msqrt>` `\sqrt{%1}` ;
+ROOT_ :: [ROOT_HEAD_] | [ROOT_HEAD2_] ;
+
+E :: [RE] | [RT] ;
+E_ :: [RE_] | [RT_] ;
+
+RELOP :: [EQ] | [LEQ] | [GEQ] | lt | gt | neq ;
+EQ :: eq ;
+EQ :g: horzline <B> horzline {_SYMBOL(eq)} `=` `=` rc(centered) ;
+LEQ :: leq ;
+LEQ :g: lt <B> horzline {_SYMBOL(leq)} `&leq;` `\leq` rc(big-centered) ;
+GEQ :: geq ;
+GEQ :g: gt <B> horzline {_SYMBOL(geq)} `&geq;` `\geq` rc(big-centered) ;
+
+REL_HEAD_ :s: [RT] <R> [RELOP] {REL(%1,%?,%2)}
+              `<mrow>%1<mo>%3</mo></mrow>` `%1 %3` ;
+#REL_HEAD2_ :s: [REL_HEAD_] <R> [E_] {REL(%1:1,%2,%1:3)}
+#               `<mrow>%1<mo>%3</mo>%2</mrow>` `%1 %3 %2` ;
+REL_HEAD2_ :s: [RT] <R> [RELOP] <R> [E_] {REL(%1,%3,%2)}
+               `<mrow>%1<mo>%3</mo>%2</mrow>` `%1 %3 %2` ;
+
+#RE :s: [REL_HEAD_] <R> [E] {REL*(%1:1,%2,%1:3)}
+#      `<mrow>%1<mo>%3</mo>%2</mrow>` `%1 %3 %2` ;
+RE :s: [RT] <R> [RELOP] <R> [E] {REL*(%1,%3,%2)}
+       `<mrow>%1<mo>%3</mo>%2</mrow>` `%1 %3 %2` ;
+RE_ :: [REL_HEAD_] | [REL_HEAD2_] ;
+
+RT :: [AE] | [AT0] ;
+RT_ :: [AE_] | [AT0_] ;
+
+RT_NOT1 :: [AE] | [AT0_NOT1] ;
+
+ADDOP :: plus | horzline | [PLUSMINUS] ;
+PLUSMINUS :: plusorminus ;
+PLUSMINUS :g: plus <B> horzline {_SYMBOL(plusorminus)} `&PlusMinus;` `\pm` rc(big-centered) ;
+
+AE_HEAD_ :s: [AT0] <R> [ADDOP] {ADD(%1,%?,%2)}
+             `<mrow>%1<mo>%3</mo></mrow>` `%1 %3` ;
+#AE_HEAD2_ :s: [AE_HEAD_] <R> [RT_] {ADD(%1:1,%2,%1:3)}
+#              `<mrow>%1<mo>%3</mo>%2</mrow>` `%1 %3 %2` ;
+AE_HEAD2_ :s: [AT0] <R> [ADDOP] <R> [RT_] {ADD(%1,%3,%2)}
+             `<mrow>%1<mo>%3</mo>%2</mrow>` `%1 %3 %2` ;
+
+#AE :s: [AE_HEAD_] <R> [RT] {ADD*(%1:1,%2,%1:3)}
+#      `<mrow>%1<mo>%3</mo>%2</mrow>` `%1 %3 %2` ;
+AE :s: [AT0] <R> [ADDOP] <R> [RT] {ADD*(%1,%3,%2)}
+      `<mrow>%1<mo>%3</mo>%2</mrow>` `%1 %3 %2` ;
+AE_ :: [AE_HEAD_] | [AE_HEAD2_] ;
+
+AT0 :: [AT] | [NEG] | [PM] ;
+AT0_ :: [AT_] | [NEG_] | [PM_] ;
+
+AT0_NOT1 :: [AT_NOT1] | [NEG] | [PM] ;
+
+NEG_HEAD_ :: horzline {NEG(!%?)} `<mrow><mo>-</mo></mrow>` `-` ;
+NEG_HEAD2_ :s: horzline <R> [AT_] {NEG(!%2)}
+               `<mrow><mo>-</mo>%1</mrow>` `-%1` ;
+NEG :s: [NEG_HEAD_] <R> [AT] {NEG*(!%2)}
+       `<mrow><mo>-</mo>%1</mrow>` `-%1` ;
+NEG_ :: [NEG_HEAD_] | [NEG_HEAD2_] ;
+
+#POS_HEAD_ :: plus {(!%?)} `<mrow><mo>+</mo></mrow>` `+` ;
+#POS_HEAD2_ :s: plus <R> [AT_] {(!%2)} `<mrow><mo>+</mo>%1</mrow>` `+%1` ;
+#POS :s: [POS_HEAD_] <R> [AT] {(!%2)} `<mrow><mo>+</mo>%1</mrow>` `+%1` ;
+#POS_ :: [POS_HEAD_] | [POS_HEAD2_] ;
+
+PM_HEAD_ :: plusorminus {PLUSMINUS(!%?)} `<mrow><mo>&PlusMinus;</mo></mrow>` `\pm` ;
+PM_HEAD2_ :s: plusorminus <R> [AT_] {PLUSMINUS(!%2)} `<mrow><mo>&PlusMinus;</mo>%1</mrow>` `\pm %1` ;
+PM :s: [PM_HEAD_] <R> [AT] {PLUSMINUS*(!%2)} `<mrow><mo>&PlusMinus;</mo>%1</mrow>` `\pm %1` ;
+PM_ :: [PM_HEAD_] | [PM_HEAD2_] ;
+
+AT :: [MULT] | [NUM] | [MULT_TRAIL] ;
+AT_ :: [MULT_TRAIL_] | [MULT_] | [MULT2_] ;
+
+AT_NOT1 :: [MULT] | [NUM_NOT1] | [MULT_TRAIL] ;
+
+MULT :: [MT0] <R> [MULT_RHS] {MULT*(%1,%2,%0)}
+        `<mrow>%1<mo>&InvisibleTimes;</mo>%2</mrow>` `%1 %2` ;
+
+MULT_ :s: [AT] <R> asterisk {MULT(%1,%?,%2)}
+        `<mrow>%1<mo>&ast;</mo></mrow>` `%1 \ast` ;
+
+MULT2_ :: [MULT_] <R> [AT_] {MULT(%1:1,%2,%1:3)}
+        `<mrow>%1<mo>&ast;</mo>%2</mrow>` `%1 \ast %2` ;
+
+MULT :: [MULT_] <R> [AT] {MULT(%1:1,%2,%1:3)}
+        `<mrow>%1<mo>&ast;</mo>%2</mrow>` `%1 \ast %2` ;
+
+MT0 :: [MT] | [NUM_NOT01] ;
+
+ASTMULT_RHS :: [MULT] | [ASTMULT_TRAIL] ;
+ASTMULT_TRAIL :: [NUM] | [MULT_TRAIL] ;
+MULT_TRAIL :: [MT] | [INT] | [SUM] | [LIMIT] ;
+MULT_TRAIL_ :: [MT_] | [INT_] | [SUM_] | [LIMIT_] ;
+
+MULT_RHS :: [MULT2] | [MULT_TRAIL] ;
+
+MULT2 :s: [MT] <R> [MULT_RHS] {MULT(%1,%2,%0)}
+         `<mrow>%1<mo>&InvisibleTimes;</mo>%2</mrow>` `%1 %2` ;
+
+FR_HEAD_ :g: [RT] <B:gs> ^fracbar$ {FRAC(%1,%?)}
+             `<mfrac>%1<mrow></mrow></mfrac>` `\frac{%1}{}` ;
+FR_HEAD2_ :g: [FR_HEAD_]$ <B:sg> [RT_] {FRAC(%1:1,%2)}
+              `<mfrac>%1%2</mfrac>` `\frac{%1}{%2}` ;
+FR :g: [FR_HEAD_]$ <B:sg> [RT] {FRAC*(%1:1,%2)}
+      `<mfrac>%1%2</mfrac>` `\frac{%1}{%2}` ;
+FR_ :: [FR_HEAD_] | [FR_HEAD2_] ;
+
+MT :: [V] | [FR] | [SUP] | [ROOT] | [VAR_PRIME] ; # | [DOTS] ;
+MT_ :: [V_] | [FR_] | [SUP_] | [ROOT_] ;
+
+FN :s: [AUTO_N] <R:gg> [AT] {FN(%1,%2)}
+      `<mrow>%1<mo>&ApplyFunction;</mo><mrow>%2</mrow></mrow>` `%1 %2` ;
+
+FN :s: [FN_LEFT] <R:gg> [PE] {FN*(%1,%2)}
+      `<mrow>%1<mo>&ApplyFunction;</mo>%2</mrow>` `%1 %2` ;
+FN_ :s: [FN_LEFT] <R:gg> [PE_] {FN(%1,%2)}
+        `<mrow>%1<mo>&ApplyFunction;</mo>%2</mrow>` `%1 %2` ;
+FN_ :s: [AUTO_N] <R:gg> [AT_] {FN(%1,%2)}
+        `<mrow>%1<mo>&ApplyFunction;</mo>%2</mrow>` `%1 %2` ;
+
+FN_NAME :: [VAR] | [SUBSCRIPT] | [AUTO_N] ;
+FN_LEFT :: [FN_NAME] | [FN_SUP] | [FN_PRIME] ;
+
+PRIMESYM :: prime | comma | 1 ;
+
+ONEPRIME :: [PRIMESYM] {PRIMESYMBOL*(!1)} `&prime;` `'` ;
+
+PRIMES :: [ONEPRIME] {PRIMESYMBOLS(!%1)} `&prime;` `'` ;
+PRIMES :: [PRIMES] <R> [ONEPRIME] {PRIMESYMBOLS*(%^)} `@join()` `@join()` ;
+
+#PRIMES :: [PRIMESYM] {PRIMESYMBOL*(!1)} `<mo>&prime;</mo>` `'` ;
+#PRIMES :: [PRIMESYM] <R> [PRIMESYM] {PRIMESYMBOL(!2)} `<mo>&Prime;</mo>` `''` ;
+#PRIMES :: [PRIMESYM] <R> [PRIMESYM] <R> [PRIMESYM] {PRIMESYMBOL(!3)} `<mo>&prime;&prime;&prime;</mo>` `'''` ;
+
+FN_SUP :s: [FN_NAME]$ <AR:ss> [RT_NOT1] {SUP(%1,%2)}
+         `<msup>%1%2</msup>` `%1^{%2}` ;
+FN_SUP_ :s: [FN_NAME]$ <AR:ss> [RT_] {SUP(%1,%2)}
+            `<msup>%1%2</msup>` `%1^{%2}` ;
+
+SUP :h: [SUP_BASE]$ <AR:ss> [RT_NOT1] {SUP*(%1,%2)}
+       `<msup>%1%2</msup>` `%1^{%2}` ;
+SUP_ :h: [SUP_BASE]$ <AR:ss> [RT_] {SUP(%1,%2)}
+         `<msup>%1%2</msup>` `%1^{%2}` ;
+
+SUP_BASE :: [V] | [ROOT] | [NUM] ;
+
+FN_PRIME :h: [VAR]$ <AR:sg> [PRIMES]
+            {PRIME(%1,%2)}
+            `<msup>%1<mo>%2</mo></msup>`
+            `%1 %2` ;
+
+NAME_CANONICAL :: [L] {NAME*(!%1)} `<mi>%1</mi>` `%1` ;
+
+AUTO_N :: [SIN] {NAME(!sin)} `<mi>sin</mi>` `\sin` ;
+AUTO_N :: [COS] {NAME(!cos)} `<mi>cos</mi>` `\cos` ;
+AUTO_N :: [TAN] {NAME(!tan)} `<mi>tan</mi>` `\tan` ;
+AUTO_N :: [EXP] {NAME(!exp)} `<mi>exp</mi>` `\exp` ;
+AUTO_N :: [LOG] {NAME(!log)} `<mi>log</mi>` `\log` ;
+AUTO_N :: [LN] {NAME(!ln)} `<mi>ln</mi>` `\ln` ;
+
+Cc :: C | c ;
+Oo :: O | o | 0 ;
+Ss :: S | s ;
+Xx :: X | x ;
+
+I :: i ;
+IJ_TOP :: dot | comma ;
+I :g: [IJ_TOP] <B> [IBOT] {_SYMBOL(i)} rc(half-ascender) ;
+IBOT :: 1 | iota | lparen | comma ;
+J :: j ;
+J :g: [IJ_TOP] <B> [JBOT] {_SYMBOL(j)} rc(half-ascender-descender) ;
+JBOT :: jota | comma ;
+
+#SIN :s: S <R:sg> [I] <R:gs> n ;
+#SIN :s: s <R:sg> [I] <R:gs> n ;
+SIN :s: [Ss] <R:sg> [I] <R:gs> n ;
+COS :s: [Cc] <R> [Oo] <R> [Ss] ;
+TAN :s: t <R> a <R> n ;
+EXP :s: e <R> x <R> p ;
+LOG :s: l <R> [Oo] <R> g ;
+LN :s: l <R> n ;
+
+CONSTANT :: [PI] | e ;
+
+VARL :: a | b | c | d | f | g | h | [I] | [J] | k | l | m
+   | n | o | p | q | r | s | t | u | v | w | x | y | z
+   | A | B | C | D | E | F | G | H | I | J | K | L | M
+   | N | O | P | Q | R | S | T | U | V | W | X | Y | Z
+   | alpha | beta | gamma | delta | epsilon | sigma
+   | theta | lambda | mu | phi | psi | rho | tau | xi
+   | zeta | Delta | Gamma | Omega | [PICAP] | Sigma ;
+
+L :: [VARL] | [CONSTANT] ;
+
+PICAP :: Pi | [PICAPMULTI] ;
+PICAPMULTI :g: horzline <B:sg> [PICAPBOT] {_SYMBOL(Pi)} `&Pi;` `\Pi` rc(ascender) ;
+PI :: pi | [PIMULTI] ;
+PIMULTI :g: horzline <B:sg> [PIBOT] {_SYMBOL(pi)} `&pi;` `\pi` rc(baseline) ;
+PICAPBOT :g: 1 <R> 1 ;
+PIBOT :: [PICAPBOT] ;
+PIBOT :g: 1 <R> iota ;
+
+V :: [VAR_EXPR] | [FN] | [FENCED] | [MATRIX] ;
+V_ :: [FN_] | [FENCED_] | [MATRIX_] ;
+
+SUB_BASE :: [NUM] | [VAR_COMMON] ;
+
+CONSTVAR :: [CONSTANT] {NUM(!%1)} `<mi>%1</mi>` `%1` ;
+
+VAR_COMMON :: [VAR] | [SUBSCRIPT] | [CONSTVAR] ;
+VAR_EXPR :: [VAR_COMMON] | [FACTORIAL] ;
+
+EXCLAIM :: exclaim ;
+EXCLAIM :g: 1 <B> dot {_SYMBOL(exclaim)} `!` `!` rc(ascender) ;
+FACTORIAL :: [SUB_BASE] <R> [EXCLAIM] {FACTORIAL*(!%1)} `<mrow>%1<mo>!</mo></mrow>` `%1!` ;
+
+VAR :: [VARL] {VAR*(!%1)} `<mi>%1</mi>` `%1` ;
+
+VAR_PRIME :h: [VAR]$ <AR:ss> [PRIMES]
+              {PRIME*(%1,%2)}
+              `<msup>%1<mo>%2</mo></msup>` `%1 %2` ;
+VAR_PRIME :h: [SUBSCRIPT]$ <AR:ss> [PRIMES]
+              {PRIME(%1,%2)}
+              `<msup>%1<mo>%2</mo></msup>` `%1 %2` ;
+
+SUBSCRIPT :h: [VAR_COMMON]$ <BR:ss> [SUB_BASE] {SUBSCR*(%1,%2)}
+              `<msub>%1%2</msub>` `%1_{%2}` ;
+
+INT :: [INDEF_INT] | [DEF_INT_LO] | [DEF_INT_HI] | [DEF_INT] ;
+INT_ :: [INDEF_INT_] | [DEF_INT_LO_] | [DEF_INT_HI_] | [DEF_INT_] ;
+
+INT_HEAD1_ :s: Integral {INTEGRAL(%0,%0,%?,%0)}
+              `<mrow><mo>&Integral;</mo></mrow>` `\int` ;
+INT_HEAD2_ :s: [INT_HEAD1_] <R> [RT] {INTEGRAL(%0,%0,%2,%0)}
+              `<mrow><mo>&Integral;</mo>%3</mrow>` `\int %3` ;
+#INT_HEAD3_ :s: [INT_HEAD2_] <R> d {INTEGRAL(%0,%0,%1:3,%?)}
+#              `<mrow><mo>&Integral;</mo>%3<mrow><mo>&DifferentialD;</mo></mrow></mrow>` `\int %3 d` ;
+INDEF_INT_ :: [INT_HEAD1_] | [INT_HEAD2_] ;
+#| [INT_HEAD3_] ;
+
+INDEF_INT :s: [INT_HEAD2_] <R> d <R> [VAR_EXPR] {INTEGRAL(%0,%0,%1:3,%3)}
+             `<mrow><mo>&Integral;</mo>%3<mo>&InvisibleTimes;</mo><mrow><mo>&DifferentialD;</mo>%4</mrow></mrow>`
+             `\int %3 d %4` ;
+
+DEF_INT_LO_HEAD1_ :s: [INTL_TAIL] {INTEGRAL(%1:1,%0,%?,%0)}
+                      `<mrow><munder><mo>&Integral;</mo>%1</munder></mrow>` `\int_{%1}` ;
+DEF_INT_LO_HEAD2_ :s: [DEF_INT_LO_HEAD1_] <R> [RT] {INTEGRAL(%1:1,%0,%2,%0)}
+                      `<mrow><munder><mo>&Integral;</mo>%1</munder>%3</mrow>` `\int_{%1} %3` ;
+#DEF_INT_LO_HEAD3_ :s: [DEF_INT_LO_HEAD2_] <R> d {INTEGRAL(%1:1,%0,%1:3,%?)}
+#                    `<mrow><munder><mo>&Integral;</mo>%1</munder>%3<mo>&InvisibleTimes;</mo><mrow><mo>&DifferentialD;</mo></mrow></mrow>` `\int_{%1} %3 d` ;
+DEF_INT_LO :s: [DEF_INT_LO_HEAD2_] <R> d <R> [VAR_EXPR]
+               {INTEGRAL(%1:1,%0,%1:3,%3)}
+               `<mrow><munder><mo>&Integral;</mo>%1</munder>%3<mo>&InvisibleTimes;</mo><mrow><mo>&DifferentialD;</mo>%4</mrow></mrow>`
+              `\int_{%1} %3 d %4` ;
+DEF_INT_LO_ :: [DEF_INT_LO_HEAD1_] | [DEF_INT_LO_HEAD2_] ;
+#| [DEF_INT_LO_HEAD3_] ;
+
+DEF_INT_HI_HEAD1_ :s: [INTL_HEAD] {INTEGRAL(%0,%1:2,%?,%0)}
+                     `<mrow><mover><mo>&Integral;</mo>%2</mover></mrow>` `\int^{%2}` ;
+DEF_INT_HI_HEAD2_ :s: [DEF_INT_HI_HEAD1_] <R> [RT] {INTEGRAL(%0,%1:2,%2,%0)}
+                      `<mrow><mover><mo>&Integral;</mo>%2</mover>%3</mrow>` `\int^{%2} %3` ;
+#DEF_INT_HI_HEAD3_ :s: [DEF_INT_HI_HEAD2_] <R> d {INTEGRAL(%0,%1:2,%1:3,%?)}
+#                      `<mrow><mover><mo>&Integral;</mo>%2</mover>%3<mo>&InvisibleTimes;</mo><mrow><mo>&DifferentialD;</mo></mrow></mrow>` `\int^{%2} %3 d` ;
+DEF_INT_HI :s: [DEF_INT_HI_HEAD2_] <R> d <R> [VAR_EXPR]
+              {INTEGRAL(%0,%1:2,%1:3,%3)}
+              `<mrow><mover><mo>&Integral;</mo>%2</mover>%3<mo>&InvisibleTimes;</mo><mrow><mo>&DifferentialD;</mo>%4</mrow></mrow>`
+              `\int^{%1} %3 d %4` ;
+DEF_INT_HI_ :: [DEF_INT_HI_HEAD1_] | [DEF_INT_HI_HEAD2_] ;
+#| [DEF_INT_HI_HEAD3_] ;
+
+DEF_INT_HEAD1_ :s: [INTL] {INTEGRAL(%1:1,%1:2,%?,%0)}
+                  `<mrow><munderover><mo>&Integral;</mo>%1%2</munderover></mrow>` `\int_{%1}^{%2}` ;
+DEF_INT_HEAD2_ :s: [DEF_INT_HEAD1_] <R> [RT] {INTEGRAL(%1:1,%1:2,%2,%0)}
+                   `<mrow><munderover><mo>&Integral;</mo>%1%2</munderover>%3</mrow>` `\int_{%1}^{%2} %3` ;
+#DEF_INT_HEAD3_ :s: [DEF_INT_HEAD2_] <R> d {INTEGRAL(%1:1,%1:2,%1:3,%?)}
+#                 `<mrow><munderover><mo>&Integral;</mo>%1%2</munderover>%3<mo>&InvisibleTimes;</mo><mrow><mo>&DifferentialD;</mo></mrow></mrow>`
+#                 `\int_{%1}^{%2} %3 d` ;
+DEF_INT :s: [DEF_INT_HEAD2_] <R> d <R> [VAR_EXPR]
+           {INTEGRAL*(%1:1,%1:2,%1:3,%3)}
+           `<mrow><munderover><mo>&Integral;</mo>%1%2</munderover>%3<mo>&InvisibleTimes;</mo><mrow><mo>&DifferentialD;</mo>%4</mrow></mrow>`
+           `\int_{%1}^{%2} %3 d %4` ;
+DEF_INT_ :: [DEF_INT_HEAD1_] | [DEF_INT_HEAD2_] ;
+#| [DEF_INT_HEAD3_] ;
+
+INTL_HEAD :s: [RT] <B:gs> ^Integral$ {_TEMP(%0,%1)} ;
+INTL_HEAD :s: Integral$ <AR:ss> [RT] {_TEMP(%0,%2)} ;
+INTL_TAIL :s: Integral$ <B:sg> [RT] {_TEMP(%2,%0)} ;
+INTL_TAIL :s: Integral$ <BR:ss> [RT] {_TEMP(%2,%0)} ;
+INTL :s: [INTL_HEAD]$ <B:sg> [RT] {_TEMP(%2,%1:2)} ;
+INTL :s: [INTL_HEAD]$ <BR:ss> [RT] {_TEMP(%2,%1:2)} ;
+INTL_ :: [INTL_HEAD] | [INTL_TAIL] ;
+
+
+SUM :: [INDEF_SUM] | [DEF_SUM_LO] | [DEF_SUM] ;
+SUM_ :: [INDEF_SUM_] | [DEF_SUM_LO_] | [DEF_SUM_] ;
+
+INDEF_SUM :s: Sigma <R> [RT] {SUM(%0,%0,%2)}
+       `<mrow><mo>&Sum;</mo>%3</mrow>` `\sum %3` ;
+INDEF_SUM_ :: Sigma {SUM(%0,%0,%?)} `<mrow><mo>&Sum;</mo></mrow>` `\sum` ;
+
+DEF_SUM_LO :s: [SUML_TAIL] <R> [RT] {SUM(%1:1,%0,%2)}
+              `<mrow><munder><mo>&Sum;</mo>%1</munder>%3</mrow>` `\sum_{%1} %3` ;
+DEF_SUM_LO_ :s: [SUML_TAIL] {SUM(%1:1,%0,%?)} `<mrow><munder><mo>&Sum;</mo>%1</munder></mrow>` `\sum_{%1}` ;
+
+DEF_SUM :s: [SUML] <R> [RT] {SUM*(%1:1,%1:2,%2)}
+           `<mrow><munderover><mo>&Sum;</mo>%1%2</munderover>%3</mrow>` `\sum_{%1}^{%2} %3` ;
+DEF_SUM_ :s: [SUML_] {SUM(%1:1,%1:2,%?)}
+             `<mrow><munderover><mo>&Sum;</mo>%1%2</munderover></mrow>` `\sum_{%1}^{%2}` ;
+DEF_SUM :s: [SUML] {SUM(%1:1,%1:2,%?)}
+            `<mrow><munderover><mo>&Sum;</mo>%1%2</munderover></mrow>` `\sum_{%1}^{%2}` ;
+
+SUML_LO :: [SUML_TAIL] ;
+SUML_HEAD :s: [RT] <B:gs> ^Sigma$ {_TEMP(%0,%1)} ;
+SUML_TAIL :s: Sigma$ <B:sg> [E] {_TEMP(%2,%0)} ;
+SUML_TAIL_ :s: Sigma$ <B:sg> [E_] {_TEMP(%2,%0)} ;
+SUML :s: [SUML_HEAD]$ <B:sg> [E] {_TEMP(%2,%1:2)} ;
+SUML_ :s: [SUML_HEAD]$ <B:sg> [E_] {_TEMP(%2,%1:2)} ;
+SUML_ :: [SUML_HEAD] | [SUML_TAIL] | [SUML_TAIL_] ;
+
+#LIMIT :: [LIMLHS] <R> [RT]
+#         {LIMIT(%1:1,%1:2,%2)}
+#         `<mrow><munder><mi>lim</mi><mrow>%1<mo>&RightArrow;</mo>%2</mrow></munder>%3</mrow>`
+#         `\lim_{%1 \rightarrow %2} %3` ;
+#LIMLHS :: [LIM] <B> [LIMAPP] {_TEMP(%2:1,%2:2)} ;
+#LIM :: l <R> [I] <R> m {_TERMINAL(lim)} ;
+#LIMAPP :: [VAR_EXPR] <R> arrow <R> [RT] {_TEMP(%1,%3)} ;
+
+NUM :: [INTEGER] {NUM*(!%1)} `<mn>%1</mn>` `%1` 
+     | [NUMCOMMON] ;
+
+NUMCOMMON :: [F] {NUM(!%1)} `<mn>%1</mn>` `%1` ;
+NUMCOMMON :: infin {NUM(!%1)} `<mn>&infin;</mn>` `\infty` ;
+
+NUM_NOT1 :: [INTEGER_NOT1] {NUM(!%1)} `<mn>%1</mn>` `%1` ;
+NUM_NOT1 :: [NUM_COMMON] ;
+
+NUM_NOT01 :: [INTEGER_NOT01] {NUM(!%1)} `<mn>%1</mn>` `%1` ;
+NUM_NOT01 :: [NUM_COMMON] ;
+	  
+INTEGER :: 1 | [INTEGER_NOT1] ;
+
+#INTEGER :: [DIGIT] {_TERMINAL(%1)} ;
+#INTEGER :s: [DIGIT1] <R> [INTEGER_TAIL] {_TERMINAL(%1%2)} ;
+INTEGER_TAIL :: [DIGIT] {_TERMINAL(%1)} ;
+INTEGER_TAIL :s: [DIGIT] <R> [INTEGER_TAIL] {_TERMINAL(%1%2)} ;
+
+INTEGER_NOT1 :: [DIGIT_NOT1] {_TERMINAL(%1)} ;
+INTEGER_NOT1 :s: [DIGIT1] <R> [INTEGER_TAIL] {_TERMINAL(%1%2) } ;
+
+INTEGER_NOT01 :: [DIGIT2] {_TERMINAL(%1)} ;
+INTEGER_NOT01 :s: [DIGIT1] <R> [INTEGER_TAIL] {_TERMINAL(%1%2) } ;
+
+F0 :s: [INTEGER]$ <BR:ss> dot {_TERMINAL(%1)} ;
+F :s: [F0] <R> [INTEGER_TAIL]$ {_TERMINAL(%1.%2)} ;
+
+DIGIT2 :: 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 ;
+DIGIT1 :: 1 | [DIGIT2] ;
+DIGIT :: 0 | [DIGIT1] ;
+DIGIT_NOT1 :: 0 | [DIGIT2] ;
+
+DOTS :: [HDOTS] | [VDOTS] | [DDOTS] | [MDDOTS] ;
+HDOTS :: dot <R> dot <R> dot {DOTS(!&hellip;)} `<mi>&hellip;</mi>` `\cdots` ;
+VDOTS :: dot <B> dot <B> dot {DOTS(!&vellip;)} `<mi>&vellip;</mi>` `\vdots` ;
+DDOTS :: dot <BR> dot <BR> dot {DOTS(!&dtdot;)} `<mi>&dtdot;</mi>` `\ddots` ;
+MDDOTS :: dot <AR> dot <AR> dot {DOTS(!&utdot;)} `<mi>&utdot;</mi>` `\iddots` ;
+
+MATRIX :s: [MATRIX_] <R> rbracket {PAREN(\[,%1:2,\])}
+          `<mfenced>%2</mfenced>` `\begin{bmatrix} %2 \end{bmatrix}` ;
+
+MATRIX_ :: lbracket <R> [MX] {PAREN(\[,%2,%?)}
+          `<mfenced>%2</mfenced>` `\begin{bmatrix} %2 \end{bmatrix}` ;
+
+MX :g: [!MATRIX]
+      {MATRIX*(%1:1, %1:2, %1:3)}
+      `<mtable>%3</mtable>` `%3` ;
+
+MULTI_EXPR :g: [!MULTI]
+               {MULTI*(!%1:3)}
+               `<mtable>%1</mtable>` `%1` ;
+
+LIST :: [E] <R> comma <R> [E] {LIST*(%#)} `<mrow>@join(<mo>,</mo>)</mrow>` `@join(,)` ;

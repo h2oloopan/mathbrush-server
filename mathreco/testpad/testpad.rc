@@ -1,0 +1,142 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MENU MENU 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&Clear",                      ID_FILE_CLEAR
+        MENUITEM SEPARATOR
+        MENUITEM "L&oad Ink",                   ID_FILE_LOADINK
+		MENUITEM "Load iPad Ink",               ID_FILE_LOADIPADINK
+        MENUITEM "Save &Ink",                   ID_FILE_SAVEINK
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                       ID_FILE_EXIT
+    END
+    POPUP "&Recognizer"
+    BEGIN
+        MENUITEM "&Recognize",                  ID_RECOGNIZE_RECOGNIZE
+        MENUITEM SEPARATOR
+        MENUITEM "&Deformable Templates",       ID_RECOGNIZE_DEFORMABLETEMPLATES
+        MENUITEM "Elastic &Matcher",            ID_RECOGNIZE_ELASTICMATCHER
+        MENUITEM "&Structural Matcher",         ID_RECOGNIZE_STRUCTURALMATCHER
+        MENUITEM "Super &Combo",                ID_RECOGNIZE_SUPERCOMBO
+        MENUITEM "&Fourier Analyzer",           ID_RECOGNIZER_FOURIERANALYZER
+        MENUITEM "Structural &Optimizer",       ID_RECOGNIZE_STRUCTURALOPTIMIZER
+        MENUITEM SEPARATOR
+        MENUITEM "&CIT Recognizer",             ID_RECOGNIZER_CITRECOGNIZER
+        MENUITEM "&Microsoft's Tablet Recognizer", ID_RECOGNIZER_MICROSOFT
+        MENUITEM "SCG Math Recognizer",         ID_RECOGNIZER_TABLET
+        MENUITEM SEPARATOR
+        MENUITEM "R&eset",                      ID_RECOGNIZE_RESET
+        MENUITEM "Subdivide",                   ID_RECOGNIZER_SUBDIVIDE
+        MENUITEM "Semantic analysis",           ID_RECOGNIZER_SEMANTICS
+		MENUITEM "Multi-line recognition",      ID_RECOGNIZER_MULTILINE
+        MENUITEM "Allow subtree alternates",    ID_RECOGNIZER_ALLOWSUBTREEALTERNATES
+    END
+    POPUP "&Matrix/Range"
+    BEGIN
+        MENUITEM "&Matrix",                     ID_MATRIX
+        MENUITEM "&Range",                      ID_RANGE
+        MENUITEM "&Test Polynomials",           ID_TEST_POLYNOM
+        MENUITEM SEPARATOR
+        MENUITEM "Use Parser",                  ID_USE_PARSER
+    END
+    POPUP "Mode"
+    BEGIN
+        MENUITEM "Draw",                        ID_MODE_DRAW
+        MENUITEM "Annotate",                    ID_MODE_ANNOTATE
+    END
+    POPUP "&Annotation"
+    BEGIN
+        MENUITEM "&1 Left",                     ID_ANNOTATION_LEFT
+        MENUITEM "&2 Above",                    ID_ANNOTATION_ABOVE
+        MENUITEM "&3 Below Left",               ID_ANNOTATION_BELOWLEFT
+        MENUITEM "&4 Above Left",               ID_ANNOTATION_BELOWRIGHT
+        MENUITEM "&5 Inside",                   ID_ANNOTATION_INSIDE
+    END
+END
+
+IDR_MENU1 MENU 
+BEGIN
+    POPUP "&Window"
+    BEGIN
+        MENUITEM "&Close",                      ID_WINDOW_CLOSE
+    END
+    POPUP "&Recognize"
+    BEGIN
+        MENUITEM "&Clear",                      ID_RECOGNIZE_CLEAR
+    END
+    POPUP "&Display"
+    BEGIN
+        MENUITEM "&Forward match",              ID_DISPLAY_FORWARDMATCH
+        MENUITEM "&Reverse match",              ID_DISPLAY_REVERSEMATCH
+    END
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
