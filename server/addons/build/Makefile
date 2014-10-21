@@ -332,6 +332,11 @@ ifeq ($(strip $(foreach prefix,$(NO_LOAD),\
                  $(join ^,hello.target.mk)))),)
   include hello.target.mk
 endif
+ifeq ($(strip $(foreach prefix,$(NO_LOAD),\
+    $(findstring $(join ^,$(prefix)),\
+                 $(join ^,recognizer.target.mk)))),)
+  include recognizer.target.mk
+endif
 
 quiet_cmd_regen_makefile = ACTION Regenerating $@
 cmd_regen_makefile = cd $(srcdir); /usr/local/lib/node_modules/node-gyp/gyp/gyp_main.py -fmake --ignore-environment "--toplevel-dir=." -I/Users/shengyingpan/Projects/mathbrush-server/server/addons/build/config.gypi -I/usr/local/lib/node_modules/node-gyp/addon.gypi -I/Users/shengyingpan/.node-gyp/0.10.26/common.gypi "--depth=." "-Goutput_dir=." "--generator-output=build" "-Dlibrary=shared_library" "-Dvisibility=default" "-Dnode_root_dir=/Users/shengyingpan/.node-gyp/0.10.26" "-Dmodule_root_dir=/Users/shengyingpan/Projects/mathbrush-server/server/addons" binding.gyp
