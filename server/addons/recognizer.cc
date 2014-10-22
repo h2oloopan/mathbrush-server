@@ -38,20 +38,78 @@ Handle<Value> Recognize(const Arguments& args) {
 	log("*********************");
 	log("* Start Recognition");
 	log(std::string("* User: ") + std::string(*str));
+	
+
+	//initialize
+	scg::SetVerbosity(0);
+	scg::SetProfilePath("");
+	scg::SetUserProfilePath("");
+	scg::SetTabletResolution(132);
+
+	if (scg::InitializeRecognizer()) {
+		return scope.Close(False());
+	}
+
+
+	scg::SetUserProfile("");
+	scg::MathRecognizer* recognizer = scg::CreateMathRecognizer();
+
+	log("* Initialization Done");
+
+	//recognize
 	log("* Input:");
+
+	scg::RawStroke* rawStrokes = new scg::RawStroke[strokes->Length()];
+
 	for (int i = 0; i < strokes->Length(); i++) {
 		log("* Stroke:");
 		Local<Array> stroke = Local<Array>::Cast(strokes->Get(i));
+
+		long* xs = new long[stroke->Length()];
+		long* ys = new long[stroke->Length()];
+
 		for (int j = 0; j < stroke->Length(); j++) {
 			Local<Array> points = Local<Array>::Cast(stroke->Get(j));
 			Local<Number> x = Local<Number>::Cast(points->Get(0));
 			Local<Number> y = Local<Number>::Cast(points->Get(1));
 			log(std::string("- x: ") + std::string(*(String::Utf8Value(x->ToString()))) + 
 				std::string(" y: ") + std::string(*(String::Utf8Value(y->ToString()))));
+
+			xs[j] = (long)x->NumberValue();
+			ys[j] = (long)y->NumberValue();
+		}
+
+		rawStrokes[i].set_points(xs, ys, stroke->Length());
+	}
+	recognizer->AddStrokes(rawStrokes, strokes->Length());
+	delete[] rawStrokes;
+
+	scg::ExpressionTree* tree = (scg::ExpressionTree*)recognizer->GetTopExpression();
+	if (tree == NULL) return scope.Close(False());
+
+
+
+
+
+	//return mathML
+	std::string result = "";
+	if (tree->HasLongForm()) {
+		scg::ExpressionIterator* iterator = tree->CreateLongFormIterator();
+		scg::ExpressionTree* expr = (scg::ExpressionTree*) iterator->next();
+		iterator->release();
+		if (expr != NULL) {
+			result = expr->long_str();
+			expr->release();
 		}
 	}
+	else {
+		result = tree->long_str();
+	}
 
-	return scope.Close(name);
+	log("* MathML: " + result);
+
+	Local<String> mathML = String::New(result.c_str());
+	return scope.Close(mathML);
 }
 
 Handle<Value> Initialize(const Arguments& args) {

@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"Handl",
+				"HandleScope"
+			],
+			[
+				"Ini",
+				"Initialize"
+			],
+			[
 				"mini",
 				"minifyJS"
 			],
@@ -128,18 +136,18 @@
 	"buffers":
 	[
 		{
-			"file": "server/apis/hello.coffee",
+			"file": "server/apis/recognizer.coffee",
 			"settings":
 			{
-				"buffer_size": 157,
+				"buffer_size": 406,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "server/app.js",
+			"file": "server/apis/recognizer.js",
 			"settings":
 			{
-				"buffer_size": 1389,
+				"buffer_size": 523,
 				"line_ending": "Unix"
 			}
 		},
@@ -147,15 +155,28 @@
 			"file": "server/addons/recognizer.cc",
 			"settings":
 			{
-				"buffer_size": 510,
+				"buffer_size": 2374,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "server/addons/binding.gyp",
+			"contents": "Searching 283 files for \"SetProfilePath\" (case sensitive)\n\n/Users/shengyingpan/Projects/mathbrush-server/mathreco/include/MathRecognizer.h:\n   22  DLLDECL void SetTabletResolution(size_t dpi);\n   23  \n   24: DLLDECL void SetProfilePath(const char *path);\n   25  DLLDECL void SetUserProfilePath(const char *path);\n   26  \n\n/Users/shengyingpan/Projects/mathbrush-server/mathreco/libmathreco/unix-utils.cpp:\n   25  \n   26  void\n   27: SetProfilePath(const char *path) {\n   28  	profile_path = path;\n   29  }\n\n/Users/shengyingpan/Projects/mathbrush-server/mathreco/libmathreco/win32-utils.cpp:\n   40  \n   41  DLLDECL void\n   42: SetProfilePath(const char *path) {\n   43  	profile_path = path;\n   44  }\n\n3 matches across 3 files\n",
 			"settings":
 			{
-				"buffer_size": 258,
+				"buffer_size": 724,
+				"line_ending": "Unix",
+				"name": "Find Results",
+				"scratch": true
+			}
+		},
+		{
+			"contents": "#include \"utils.h\"\n#include \"error.h\"\n#include \"memory.h\"\n\n#include <cstdlib>\n\n\nnamespace scg\n{\n\n\nstatic std::string profile_path;\n\nint\nGetProfilePath(std::string &path) {\n	if (!profile_path.empty()) {\n		path = profile_path;\n	}\n	else {\n	 path = std::getenv(\"LIBMATHRECO_ROOT\");\n	 path.append(\"/data-files/\");\n	}\n	return 0;\n}\n\nvoid\nSetProfilePath(const char *path) {\n	profile_path = path;\n}\n\nint\nReadMicrosoftStrokeGroupInk(std::istream &is, RawStrokeGroup &strokes, unsigned ink_sz)\n{\n	return E_INVALID;\n}\n\nint\nReadMicrosoftStrokeGroupInk(std::istream &is, RawStrokeGroup &strokes)\n{\n	return E_INVALID;\n}\n\n}\n\n",
+			"file": "mathreco/libmathreco/unix-utils.cpp",
+			"file_size": 609,
+			"file_write_time": 130582999070000000,
+			"settings":
+			{
+				"buffer_size": 609,
 				"line_ending": "Unix"
 			}
 		}
@@ -203,17 +224,22 @@
 	[
 		"/Users/shengyingpan/Projects/mathbrush-server",
 		"/Users/shengyingpan/Projects/mathbrush-server/mathreco",
+		"/Users/shengyingpan/Projects/mathbrush-server/mathreco/libmathreco",
+		"/Users/shengyingpan/Projects/mathbrush-server/server",
 		"/Users/shengyingpan/Projects/mathbrush-server/server/addons",
 		"/Users/shengyingpan/Projects/mathbrush-server/server/apis"
 	],
 	"file_history":
 	[
+		"/Users/shengyingpan/Projects/mathbrush-server/server/addons/recognizer.h",
+		"/Users/shengyingpan/Projects/mathbrush-server/server/app.js",
+		"/Users/shengyingpan/Projects/mathbrush-server/server/addons/recognizer.cc",
+		"/Users/shengyingpan/Projects/mathbrush-server/server/addons/binding.gyp",
+		"/Users/shengyingpan/Projects/mathbrush-server/server/addons/build/recognizer.target.mk",
 		"/Users/shengyingpan/Projects/mathbrush-server/server/addons/recognizer.coffee",
 		"/Users/shengyingpan/Projects/mathbrush-server/server/starter.coffee",
 		"/Users/shengyingpan/Projects/mathbrush-server/server/apis/hello.js",
-		"/Users/shengyingpan/Projects/mathbrush-server/server/app.js",
 		"/Users/shengyingpan/Projects/mathbrush-server/server/addons/hello.cc",
-		"/Users/shengyingpan/Projects/mathbrush-server/server/addons/binding.gyp",
 		"/Users/shengyingpan/Projects/mathbrush-server/server/addons/build/Release/hello.node",
 		"/Users/shengyingpan/Projects/mathbrush-server/server/starter.js",
 		"/Users/shengyingpan/Projects/mathbrush-server/server/bin/www",
@@ -308,13 +334,14 @@
 	],
 	"find":
 	{
-		"height": 23.0
+		"height": 35.0
 	},
 	"find_in_files":
 	{
 		"height": 93.0,
 		"where_history":
 		[
+			"/Users/shengyingpan/Projects/mathbrush-server/mathreco"
 		]
 	},
 	"find_state":
@@ -322,6 +349,8 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"SetProfilePath",
+			"depsdir",
 			"ext",
 			"didinsert",
 			"term",
@@ -387,29 +416,58 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 2,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "server/apis/hello.coffee",
+					"file": "server/apis/recognizer.coffee",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 157,
+						"buffer_size": 406,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								157,
-								157
+								336,
+								336
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Better CoffeeScript/CoffeeScript.tmLanguage"
+							"syntax": "Packages/Better CoffeeScript/CoffeeScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "server/apis/recognizer.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 523,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -419,55 +477,80 @@
 					"type": "text"
 				},
 				{
-					"buffer": 1,
-					"file": "server/app.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1389,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								673,
-								673
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 292.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
 					"buffer": 2,
 					"file": "server/addons/recognizer.cc",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 510,
+						"buffer_size": 2374,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								279,
-								279
+								1855,
+								1855
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/C++/C++.tmLanguage"
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 549.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 724,
+						"regions":
+						{
+							"match":
+							{
+								"flags": 112,
+								"regions":
+								[
+									[
+										221,
+										235
+									],
+									[
+										432,
+										446
+									],
+									[
+										625,
+										639
+									]
+								],
+								"scope": ""
+							}
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"detect_indentation": false,
+							"line_numbers": false,
+							"output_tag": 1,
+							"result_base_dir": "",
+							"result_file_regex": "^([A-Za-z\\\\/<].*):$",
+							"result_line_regex": "^ +([0-9]+):",
+							"scroll_past_end": true,
+							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -477,31 +560,32 @@
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "server/addons/binding.gyp",
+					"buffer": 4,
+					"file": "mathreco/libmathreco/unix-utils.cpp",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 258,
+						"buffer_size": 609,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								247,
-								247
+								308,
+								308
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 37.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 2,
 					"type": "text"
 				}
 			]
