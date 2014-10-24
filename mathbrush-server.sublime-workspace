@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"lon",
+				"long_str"
+			],
+			[
+				"Expre",
+				"ExpressionTree"
+			],
+			[
+				"recog",
+				"recognizer"
+			],
+			[
 				"Handl",
 				"HandleScope"
 			],
@@ -136,47 +148,10 @@
 	"buffers":
 	[
 		{
-			"file": "server/apis/recognizer.coffee",
-			"settings":
-			{
-				"buffer_size": 406,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "server/apis/recognizer.js",
-			"settings":
-			{
-				"buffer_size": 523,
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "server/addons/recognizer.cc",
 			"settings":
 			{
-				"buffer_size": 2374,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"contents": "Searching 283 files for \"SetProfilePath\" (case sensitive)\n\n/Users/shengyingpan/Projects/mathbrush-server/mathreco/include/MathRecognizer.h:\n   22  DLLDECL void SetTabletResolution(size_t dpi);\n   23  \n   24: DLLDECL void SetProfilePath(const char *path);\n   25  DLLDECL void SetUserProfilePath(const char *path);\n   26  \n\n/Users/shengyingpan/Projects/mathbrush-server/mathreco/libmathreco/unix-utils.cpp:\n   25  \n   26  void\n   27: SetProfilePath(const char *path) {\n   28  	profile_path = path;\n   29  }\n\n/Users/shengyingpan/Projects/mathbrush-server/mathreco/libmathreco/win32-utils.cpp:\n   40  \n   41  DLLDECL void\n   42: SetProfilePath(const char *path) {\n   43  	profile_path = path;\n   44  }\n\n3 matches across 3 files\n",
-			"settings":
-			{
-				"buffer_size": 724,
-				"line_ending": "Unix",
-				"name": "Find Results",
-				"scratch": true
-			}
-		},
-		{
-			"contents": "#include \"utils.h\"\n#include \"error.h\"\n#include \"memory.h\"\n\n#include <cstdlib>\n\n\nnamespace scg\n{\n\n\nstatic std::string profile_path;\n\nint\nGetProfilePath(std::string &path) {\n	if (!profile_path.empty()) {\n		path = profile_path;\n	}\n	else {\n	 path = std::getenv(\"LIBMATHRECO_ROOT\");\n	 path.append(\"/data-files/\");\n	}\n	return 0;\n}\n\nvoid\nSetProfilePath(const char *path) {\n	profile_path = path;\n}\n\nint\nReadMicrosoftStrokeGroupInk(std::istream &is, RawStrokeGroup &strokes, unsigned ink_sz)\n{\n	return E_INVALID;\n}\n\nint\nReadMicrosoftStrokeGroupInk(std::istream &is, RawStrokeGroup &strokes)\n{\n	return E_INVALID;\n}\n\n}\n\n",
-			"file": "mathreco/libmathreco/unix-utils.cpp",
-			"file_size": 609,
-			"file_write_time": 130582999070000000,
-			"settings":
-			{
-				"buffer_size": 609,
+				"buffer_size": 3388,
 				"line_ending": "Unix"
 			}
 		}
@@ -231,6 +206,9 @@
 	],
 	"file_history":
 	[
+		"/Users/shengyingpan/Projects/mathbrush-server/server/apis/recognizer.coffee",
+		"/Users/shengyingpan/Projects/mathbrush-server/server/apis/recognizer.js",
+		"/Users/shengyingpan/Projects/mathbrush-server/mathreco/libmathreco/unix-utils.cpp",
 		"/Users/shengyingpan/Projects/mathbrush-server/server/addons/recognizer.h",
 		"/Users/shengyingpan/Projects/mathbrush-server/server/app.js",
 		"/Users/shengyingpan/Projects/mathbrush-server/server/addons/recognizer.cc",
@@ -416,81 +394,24 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "server/apis/recognizer.coffee",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 406,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								336,
-								336
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Better CoffeeScript/CoffeeScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "server/apis/recognizer.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 523,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
 					"file": "server/addons/recognizer.cc",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2374,
+						"buffer_size": 3388,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1855,
-								1855
+								2913,
+								2913
 							]
 						],
 						"settings":
@@ -499,93 +420,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 549.0,
+						"translation.y": 1252.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 724,
-						"regions":
-						{
-							"match":
-							{
-								"flags": 112,
-								"regions":
-								[
-									[
-										221,
-										235
-									],
-									[
-										432,
-										446
-									],
-									[
-										625,
-										639
-									]
-								],
-								"scope": ""
-							}
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"detect_indentation": false,
-							"line_numbers": false,
-							"output_tag": 1,
-							"result_base_dir": "",
-							"result_file_regex": "^([A-Za-z\\\\/<].*):$",
-							"result_line_regex": "^ +([0-9]+):",
-							"scroll_past_end": true,
-							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "mathreco/libmathreco/unix-utils.cpp",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 609,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								308,
-								308
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 37.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
 					"type": "text"
 				}
 			]
@@ -664,7 +502,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 267.0,
+	"side_bar_width": 179.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
