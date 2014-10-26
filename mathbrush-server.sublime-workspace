@@ -154,6 +154,48 @@
 				"buffer_size": 3388,
 				"line_ending": "Unix"
 			}
+		},
+		{
+			"file": "server/public/javascripts/libs/require.js",
+			"settings":
+			{
+				"buffer_size": 83083,
+				"line_ending": "Unix",
+				"name": "/** vim: et:ts=4:sw=4:sts=4"
+			}
+		},
+		{
+			"file": "server/public/javascripts/libs/text.js",
+			"settings":
+			{
+				"buffer_size": 15611,
+				"line_ending": "Unix",
+				"name": "/**"
+			}
+		},
+		{
+			"file": "server/pages/index.html",
+			"settings":
+			{
+				"buffer_size": 71,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "server/app.js",
+			"settings":
+			{
+				"buffer_size": 1391,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "server/starter.coffee",
+			"settings":
+			{
+				"buffer_size": 557,
+				"line_ending": "Unix"
+			}
 		}
 	],
 	"build_system": "",
@@ -198,14 +240,13 @@
 	"expanded_folders":
 	[
 		"/Users/shengyingpan/Projects/mathbrush-server",
-		"/Users/shengyingpan/Projects/mathbrush-server/mathreco",
-		"/Users/shengyingpan/Projects/mathbrush-server/mathreco/libmathreco",
 		"/Users/shengyingpan/Projects/mathbrush-server/server",
-		"/Users/shengyingpan/Projects/mathbrush-server/server/addons",
-		"/Users/shengyingpan/Projects/mathbrush-server/server/apis"
+		"/Users/shengyingpan/Projects/mathbrush-server/server/pages"
 	],
 	"file_history":
 	[
+		"/Users/shengyingpan/Projects/mathbrush-server/server/package.json",
+		"/Users/shengyingpan/Projects/mathbrush-server/server/public/templates",
 		"/Users/shengyingpan/Projects/mathbrush-server/server/apis/recognizer.coffee",
 		"/Users/shengyingpan/Projects/mathbrush-server/server/apis/recognizer.js",
 		"/Users/shengyingpan/Projects/mathbrush-server/mathreco/libmathreco/unix-utils.cpp",
@@ -394,7 +435,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 5,
 			"sheets":
 			[
 				{
@@ -421,6 +462,154 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 1252.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "server/public/javascripts/libs/require.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 83083,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								83083,
+								83083
+							]
+						],
+						"settings":
+						{
+							"auto_name": "/** vim: et:ts=4:sw=4:sts=4",
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 30517.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "server/public/javascripts/libs/text.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 15611,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								15611,
+								15611
+							]
+						],
+						"settings":
+						{
+							"auto_name": "/**",
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 5227.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "server/pages/index.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 71,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								54,
+								54
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "server/app.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1391,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								834,
+								834
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "server/starter.coffee",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 557,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								553,
+								553
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Better CoffeeScript/CoffeeScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -502,7 +691,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 179.0,
+	"side_bar_width": 385.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

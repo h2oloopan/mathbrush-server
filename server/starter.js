@@ -7,7 +7,7 @@ fs = require('fs');
 
 folder = path.resolve('apis');
 
-index = path.resolve('pages/index.html');
+index = 'pages/index.html';
 
 exports.start = function(app) {
   var api, files, _i, _len;
@@ -19,12 +19,8 @@ exports.start = function(app) {
     }
   }
   return app.get('/', function(req, res) {
-    return fs.readFile(index, function(err, data) {
-      if (err) {
-        return res.send(500, err.message);
-      } else {
-        return res.send(200, data);
-      }
+    return res.sendfile(index, {
+      root: __dirname
     });
   });
 };
