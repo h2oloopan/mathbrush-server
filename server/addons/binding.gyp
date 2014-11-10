@@ -9,10 +9,12 @@
 			"sources": [ "recognizer.cc" ],
 			"include_dirs": ["../../mathreco/include"],
 			"conditions": [
-				"OS=='mac'",
-				{
-					"libraries": ["../../../libs/libmathreco_osx.a"]
-				}
+				[
+					"OS=='mac'",
+					{
+						"libraries": ["../../../libs/libmathreco_osx.a"]
+					}
+				]
 			]
 		}
 	]

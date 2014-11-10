@@ -133,7 +133,7 @@ LIBTOOLFLAGS_Release := \
 
 LIBS := \
 	-undefined dynamic_lookup \
-	../../../mathreco/lib/libmathreco.a
+	../../../libs/libmathreco_osx.a
 
 $(builddir)/recognizer.node: GYP_LDFLAGS := $(LDFLAGS_$(BUILDTYPE))
 $(builddir)/recognizer.node: LIBS := $(LIBS)
