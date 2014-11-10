@@ -193,7 +193,7 @@
 			"file": "server/starter.coffee",
 			"settings":
 			{
-				"buffer_size": 557,
+				"buffer_size": 404,
 				"line_ending": "Unix"
 			}
 		}
@@ -593,20 +593,21 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 557,
+						"buffer_size": 404,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								553,
-								553
+								377,
+								377
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Better CoffeeScript/CoffeeScript.tmLanguage"
+							"syntax": "Packages/Better CoffeeScript/CoffeeScript.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
