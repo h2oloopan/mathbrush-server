@@ -8,7 +8,12 @@
 			"target_name": "recognizer",
 			"sources": [ "recognizer.cc" ],
 			"include_dirs": ["../../mathreco/include"],
-			"libraries": ["../../../mathreco/lib/libmathreco.a"]
+			"conditions": [
+				"OS=='mac'",
+				{
+					"libraries": ["../../../libs/libmathreco_osx.a"]
+				}
+			]
 		}
 	]
 }
