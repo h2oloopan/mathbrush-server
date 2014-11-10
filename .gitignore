@@ -1,7 +1,3 @@
 *.sublime-project
-<<<<<<< HEAD
 *.sublime-workspace
-=======
-*.sublime-workspace
-mathreco/lib/*.a
->>>>>>> 98018f9f10672095ac7a996b5fb4fe84bcd73a9b
+mathreco/libmathreco/*.o
