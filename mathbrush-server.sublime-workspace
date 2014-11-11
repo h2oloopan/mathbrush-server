@@ -4,24 +4,56 @@
 		"selected_items":
 		[
 			[
-				"lon",
-				"long_str"
+				"ques",
+				"questions"
 			],
 			[
-				"Expre",
-				"ExpressionTree"
+				"autho",
+				"authorizer"
 			],
 			[
-				"recog",
-				"recognizer"
+				"privi",
+				"privilege"
 			],
 			[
-				"Handl",
-				"HandleScope"
+				"con",
+				"controllers"
 			],
 			[
-				"Ini",
-				"Initialize"
+				"after",
+				"afterFunctions"
+			],
+			[
+				"subj",
+				"subject"
+			],
+			[
+				"init",
+				"initialize"
+			],
+			[
+				"set",
+				"settings"
+			],
+			[
+				"save",
+				"saveSettings"
+			],
+			[
+				"sub",
+				"subject"
+			],
+			[
+				"sele",
+				"selectedSubject"
+			],
+			[
+				"select",
+				"selectedTerm"
+			],
+			[
+				"selec",
+				"selectedTerm"
 			],
 			[
 				"mini",
@@ -44,19 +76,7 @@
 				"options"
 			],
 			[
-				"sub",
-				"subjects"
-			],
-			[
-				"subj",
-				"subjects"
-			],
-			[
 				"selected",
-				"selectedSubject"
-			],
-			[
-				"selec",
 				"selectedSubject"
 			],
 			[
@@ -78,10 +98,6 @@
 			[
 				"scho",
 				"school"
-			],
-			[
-				"sele",
-				"selectedSubject"
 			],
 			[
 				"isad",
@@ -147,14 +163,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "server/addons/binding.gyp",
-			"settings":
-			{
-				"buffer_size": 330,
-				"line_ending": "Unix"
-			}
-		}
 	],
 	"build_system": "",
 	"command_palette":
@@ -197,75 +205,61 @@
 	},
 	"expanded_folders":
 	[
-		"/Users/shengyingpan/Projects/mathbrush-server",
-		"/Users/shengyingpan/Projects/mathbrush-server/server",
-		"/Users/shengyingpan/Projects/mathbrush-server/server/addons"
+		"/Users/shengyingpan/Projects/mathbrush-server"
 	],
 	"file_history":
 	[
-		"/Users/shengyingpan/Projects/mathbrush-server/server/public/javascripts/libs/require.js",
-		"/Users/shengyingpan/Projects/mathbrush-server/server/addons/recognizer.cc",
-		"/Users/shengyingpan/Projects/mathbrush-server/server/public/javascripts/libs/text.js",
-		"/Users/shengyingpan/Projects/mathbrush-server/server/pages/index.html",
-		"/Users/shengyingpan/Projects/mathbrush-server/server/app.js",
-		"/Users/shengyingpan/Projects/mathbrush-server/server/starter.coffee",
-		"/Users/shengyingpan/Projects/mathbrush-server/.gitignore",
-		"/Users/shengyingpan/Projects/mathbrush-server/server/addons/binding.gyp",
-		"/Users/shengyingpan/Projects/mathbrush-server/server/package.json",
-		"/Users/shengyingpan/Projects/mathbrush-server/server/public/templates",
-		"/Users/shengyingpan/Projects/mathbrush-server/server/apis/recognizer.coffee",
-		"/Users/shengyingpan/Projects/mathbrush-server/server/apis/recognizer.js",
-		"/Users/shengyingpan/Projects/mathbrush-server/mathreco/libmathreco/unix-utils.cpp",
-		"/Users/shengyingpan/Projects/mathbrush-server/server/addons/recognizer.h",
-		"/Users/shengyingpan/Projects/mathbrush-server/server/addons/build/recognizer.target.mk",
-		"/Users/shengyingpan/Projects/mathbrush-server/server/addons/recognizer.coffee",
-		"/Users/shengyingpan/Projects/mathbrush-server/server/apis/hello.js",
-		"/Users/shengyingpan/Projects/mathbrush-server/server/addons/hello.cc",
-		"/Users/shengyingpan/Projects/mathbrush-server/server/addons/build/Release/hello.node",
-		"/Users/shengyingpan/Projects/mathbrush-server/server/starter.js",
-		"/Users/shengyingpan/Projects/mathbrush-server/server/bin/www",
+		"/Users/shengyingpan/Projects/ti/app/models/question.coffee",
+		"/Users/shengyingpan/Projects/ti/app/helpers/authorizer.coffee",
+		"/Users/shengyingpan/Projects/ti/app/public/css/main.css",
+		"/Users/shengyingpan/Projects/ti/app/public/js/routes/adminRoute.coffee",
+		"/Users/shengyingpan/Projects/ti/app/public/templates/admin/users.html",
+		"/Users/shengyingpan/Projects/ti/app/public/templates/admin/admin.html",
 		"/Users/shengyingpan/Projects/ti/app/node_modules/mongo-ember/lib/api.coffee",
-		"/Users/shengyingpan/Projects/ti/app/node_modules/mongo-ember/lib/optimizer.coffee",
+		"/Users/shengyingpan/Projects/ti/app/models/log.coffee",
+		"/Users/shengyingpan/Projects/ti/app/models/user.coffee",
+		"/Users/shengyingpan/Projects/ti/app/models/school.coffee",
+		"/Users/shengyingpan/Projects/ti/app/public/templates/admin/users.edit.html",
+		"/Users/shengyingpan/Projects/ti/app/public/js/loader.coffee",
+		"/Users/shengyingpan/Projects/ti/app/public/js/routes/adminRoute.js",
+		"/Users/shengyingpan/Projects/ti/app/public/js/libs/moment.js",
+		"/Users/shengyingpan/Projects/ti/app/node_modules/mongo-ember/client/me.js",
+		"/Users/shengyingpan/Projects/ti/app/node_modules/mongo-ember/client/me.coffee",
+		"/Users/shengyingpan/Projects/ti/app/public/js/libs/utils.coffee",
 		"/Users/shengyingpan/Projects/ti/app/node_modules/mongo-ember/lib/mongo-ember.coffee",
+		"/Users/shengyingpan/Projects/ti/app/public/templates/admin/users.new.html",
+		"/Users/shengyingpan/Projects/ti/app/helpers/mailer.coffee",
 		"/Users/shengyingpan/Projects/ti/app/initializer.coffee",
+		"/Users/shengyingpan/Projects/ti/app/public/js/routes/questionsRoute.coffee",
+		"/Users/shengyingpan/Projects/ti/app/public/js/routes/questionsRoute.js",
+		"/Users/shengyingpan/Projects/ti/app/public/templates/questions/question.edit.html",
+		"/Users/shengyingpan/Projects/ti/app/public/templates/questions/questions.new.html",
+		"/Users/shengyingpan/Projects/ti/app/public/templates/admin/school.edit.html",
+		"/Users/shengyingpan/Projects/ti/app/public/js/app.coffee",
+		"/Users/shengyingpan/Projects/ti/app/public/js/libs/jquery.cookie.js",
+		"/Users/shengyingpan/Projects/ti/app/app.js",
+		"/Users/shengyingpan/Projects/ti/app/configurations/uwaterloo.coffee",
+		"/Users/shengyingpan/Projects/ti/app/node_modules/mongo-ember/lib/optimizer.coffee",
 		"/Users/shengyingpan/Projects/ti/app/public/js/libs/jquery.hotkeys.js",
 		"/Users/shengyingpan/Projects/ti/app/node_modules/mongo-ember/lib/auth.coffee",
 		"/Users/shengyingpan/Projects/ti/app/node_modules/mongo-ember/lib/optimizer.js",
-		"/Users/shengyingpan/Projects/ti/app/app.js",
-		"/Users/shengyingpan/Projects/ti/app/public/js/loader.coffee",
 		"/Users/shengyingpan/Projects/ti/app/public/templates/admin/schools.js",
-		"/Users/shengyingpan/Projects/ti/app/public/templates/admin/users.new.html",
 		"/Users/shengyingpan/Projects/ti/app/public/templates/admin/users.new.js",
 		"/Users/shengyingpan/Projects/ti/app/public/templates/admin/admin.js",
 		"/Users/shengyingpan/Projects/ti/app/node_modules/mongo-ember/js/handlebars.js",
 		"/Users/shengyingpan/Projects/ti/app/node_modules/mongo-ember/js/ember.js",
 		"/Users/shengyingpan/Projects/ti/app/public/js/libs/ember.js",
-		"/Users/shengyingpan/Projects/ti/app/public/templates/admin/school.edit.html",
-		"/Users/shengyingpan/Projects/ti/app/public/css/main.css",
 		"/Users/shengyingpan/Projects/ti/app/public/js/libs/ehbs.js",
-		"/Users/shengyingpan/Projects/ti/app/models/school.coffee",
 		"/Users/shengyingpan/Projects/ti/app/public/templates/admin/schools.html",
-		"/Users/shengyingpan/Projects/ti/app/public/js/routes/adminRoute.coffee",
-		"/Users/shengyingpan/Projects/ti/app/configurations/uwaterloo.coffee",
-		"/Users/shengyingpan/Projects/ti/app/public/js/routes/questionsRoute.coffee",
 		"/Users/shengyingpan/Projects/ti/app/public/js/libs/ember-data.js",
-		"/Users/shengyingpan/Projects/ti/app/public/js/libs/utils.coffee",
 		"/Users/shengyingpan/Projects/ti/app/public/js/libs/me.js",
 		"/Users/shengyingpan/Projects/ti/app/public/js/libs/jquery.js",
 		"/Users/shengyingpan/Projects/ti/app/public/js/libs/handlebars.js",
 		"/Users/shengyingpan/Projects/ti/app/public/js/libs/bootstrap.js",
 		"/Users/shengyingpan/Projects/ti/app/public/js/libs/bootstrap-wysiwyg.js",
 		"/Users/shengyingpan/Projects/ti/app/config.js",
-		"/Users/shengyingpan/Projects/ti/app/public/templates/admin/admin.html",
-		"/Users/shengyingpan/Projects/ti/app/public/templates/admin/users.html",
-		"/Users/shengyingpan/Projects/ti/app/public/templates/questions/questions.new.html",
-		"/Users/shengyingpan/Projects/ti/app/public/js/routes/adminRoute.js",
 		"/Users/shengyingpan/Projects/ti/app/public/templates/questions/questions.index.html",
-		"/Users/shengyingpan/Projects/ti/app/models/question.coffee",
 		"/Users/shengyingpan/Projects/ti/app/node_modules/mongo-ember/lib/api.js",
-		"/Users/shengyingpan/Projects/ti/app/models/user.coffee",
-		"/Users/shengyingpan/Projects/ti/app/public/js/app.coffee",
-		"/Users/shengyingpan/Projects/ti/app/helpers/mailer.coffee",
 		"/Users/shengyingpan/Projects/ti/app/helpers/mailTemplates/registration.html",
 		"/Users/shengyingpan/Projects/ti/app/helpers/mailer.js",
 		"/Users/shengyingpan/Projects/ti/app/config.coffee",
@@ -273,8 +267,6 @@
 		"/Users/shengyingpan/Projects/ti/app/models/user.js",
 		"/Users/shengyingpan/Projects/ti/app/models/question.js",
 		"/Users/shengyingpan/Projects/ti/app/node_modules/mongo-ember/lib/js.coffee",
-		"/Users/shengyingpan/Projects/ti/app/node_modules/mongo-ember/client/me.coffee",
-		"/Users/shengyingpan/Projects/ti/app/public/templates/questions/question.edit.html",
 		"/Users/shengyingpan/Projects/ti/app/index.html",
 		"/Users/shengyingpan/Projects/ti/app/public/templates/login.html",
 		"/Users/shengyingpan/Projects/ti/app/public/templates/error.html",
@@ -282,7 +274,6 @@
 		"/Users/shengyingpan/Projects/ti/app/public/templates/admin/admin.schools.html",
 		"/Users/shengyingpan/Projects/ti/app/public/templates/header.html",
 		"/Users/shengyingpan/Projects/ti/app/node_modules/mongo-ember/lib/mongo-ember.js",
-		"/Users/shengyingpan/Projects/ti/app/public/js/routes/questionsRoute.js",
 		"/Users/shengyingpan/Library/Application Support/Sublime Text 3/Packages/User/Default (OSX).sublime-keymap",
 		"/Users/shengyingpan/Projects/ti/.gitignore",
 		"/Users/shengyingpan/Projects/htn-w2g/web/js/libs/ma.coffee",
@@ -315,14 +306,13 @@
 	],
 	"find":
 	{
-		"height": 35.0
+		"height": 23.0
 	},
 	"find_in_files":
 	{
-		"height": 93.0,
+		"height": 0.0,
 		"where_history":
 		[
-			"/Users/shengyingpan/Projects/mathbrush-server/mathreco"
 		]
 	},
 	"find_state":
@@ -330,8 +320,15 @@
 		"case_sensitive": true,
 		"find_history":
 		[
-			"SetProfilePath",
-			"depsdir",
+			"edit",
+			"needs",
+			"controllers",
+			"school",
+			"edit",
+			"errors",
+			"manipulate",
+			"error",
+			"code",
 			"ext",
 			"didinsert",
 			"term",
@@ -383,6 +380,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"before",
 			"course",
 			"Course",
 			"question_fake.",
@@ -397,38 +395,8 @@
 	"groups":
 	[
 		{
-			"selected": 0,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "server/addons/binding.gyp",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 330,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								309,
-								309
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
 			]
 		}
 	],
@@ -505,7 +473,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 205.0,
+	"side_bar_width": 267.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
