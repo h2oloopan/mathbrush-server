@@ -46,7 +46,6 @@ body {
 }
 .site-wrapper-inner {
   display: table-cell;
-  vertical-align: top;
 }
 .cover-container {
   margin-right: auto;
@@ -116,7 +115,9 @@ body {
   padding: 10px 20px;
   font-weight: bold;
 }
-
+.inner.cover {
+	margin-top: 100px;
+}
 
 /*
  * Footer
@@ -144,7 +145,6 @@ body {
   }
   /* Start the vertical centering */
   .site-wrapper-inner {
-    vertical-align: middle;
   }
   /* Handle the widths */
   .masthead,
@@ -158,6 +158,6 @@ body {
   .masthead,
   .mastfoot,
   .cover-container {
-    width: 700px;
+    width: 900px;
   }
 }

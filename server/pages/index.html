@@ -5,6 +5,9 @@
 		<title>Mathbrush - Web</title>
 		<link rel="stylesheet" href="stylesheets/bootstrap.css">
 		<link rel="stylesheet" href="stylesheets/style.css">
+		<script type="text/javascript" src="javascripts/libs/jquery.js"></script>
+		<script type="text/javascript" src="javascripts/libs/modernizr.js"></script>
+		<script type="text/javascript" src="javascripts/drawing.js"></script>
 		<script type="text/javascript" src="javascripts/libs/angular.js"></script>
 		<script type="text/javascript" src="javascripts/controllers.js"></script>
 	</head>
@@ -24,8 +27,19 @@
 							-->
 						</div>
 					</div>
+					<div class="inner cover">
+						<div class="canvas-container">
+							<canvas id="canvas" width="860" height="500"></canvas>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
+		<script type="text/javascript">
+			$(function(){
+				var drawing = new Drawing($('#canvas'));
+				drawing.draw();
+			});
+		</script>
 	</body>
 </html>
