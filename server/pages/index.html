@@ -31,6 +31,10 @@
 						<div class="canvas-container">
 							<canvas id="canvas" width="860" height="500"></canvas>
 						</div>
+						<div>
+							<button class="btn btn-success">Recognize</button>
+							<button class="btn btn-default">Clean</button>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -39,6 +43,8 @@
 			$(function(){
 				var drawing = new Drawing($('#canvas'));
 				drawing.draw();
+				//bind buttons
+				
 			});
 		</script>
 	</body>

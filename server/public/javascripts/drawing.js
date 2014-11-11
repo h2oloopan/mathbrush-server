@@ -7,10 +7,46 @@ Drawing = (function() {
   }
 
   Drawing.prototype.draw = function() {
-    var ctx;
+    var ctx, drawMouse, getMousePos;
     ctx = this.canvas.getContext('2d');
     ctx.fillStyle = '#FFFFFF';
-    return ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    ctx.lineWidth = 3;
+    ctx.lineCap = 'round';
+    getMousePos = function(canvas, e) {
+      var pos, rect;
+      rect = canvas.getBoundingClientRect();
+      return pos = {
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top
+      };
+    };
+    drawMouse = function(canvas) {
+      var clicked, move, start, stop;
+      clicked = 0;
+      start = function(e) {
+        var pos;
+        clicked = 1;
+        ctx.beginPath();
+        pos = getMousePos(canvas, e);
+        return ctx.moveTo(pos.x, pos.y);
+      };
+      move = function(e) {
+        var pos;
+        if (clicked) {
+          pos = getMousePos(canvas, e);
+          ctx.lineTo(pos.x, pos.y);
+          return ctx.stroke();
+        }
+      };
+      stop = function(e) {
+        return clicked = 0;
+      };
+      $(canvas).on('mousedown', start);
+      $(canvas).on('mousemove', move);
+      return $(canvas).on('mouseup', stop);
+    };
+    return drawMouse(this.canvas);
   };
 
   return Drawing;
