@@ -57,10 +57,14 @@
 		<script type="text/javascript">
 			$(function(){
 				var drawing = new Drawing($('#canvas'));
-				drawing.draw();
+				drawing.init();
 				//bind buttons
-				$('.btn-recognize').click(drawing.recognize);
-				$('.btn-clean').click(drawing.clean);
+				$('.btn-recognize').click(function() {
+					drawing.recognize();
+				});
+				$('.btn-clean').click(function() {
+					drawing.clean();
+				});
 			});
 		</script>
 	</body>

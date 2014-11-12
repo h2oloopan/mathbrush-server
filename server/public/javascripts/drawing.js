@@ -4,57 +4,77 @@ var Drawing;
 Drawing = (function() {
   function Drawing(canvas) {
     this.canvas = canvas[0];
+    this.ctx = this.canvas.getContext('2d');
+    this.strokes = [];
+    this.stroke = [];
+    this.clicked = 0;
   }
 
-  Drawing.prototype.draw = function() {
-    var ctx, drawMouse, getMousePos;
-    ctx = this.canvas.getContext('2d');
-    ctx.fillStyle = '#FFFFFF';
-    ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-    ctx.lineWidth = 3;
-    ctx.lineCap = 'round';
-    getMousePos = function(canvas, e) {
-      var pos, rect;
-      rect = canvas.getBoundingClientRect();
-      return pos = {
-        x: e.clientX - rect.left,
-        y: e.clientY - rect.top
-      };
+  Drawing.prototype.getMousePos = function(e) {
+    var pos, rect;
+    rect = this.canvas.getBoundingClientRect();
+    return pos = {
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top
     };
-    drawMouse = function(canvas) {
-      var clicked, move, start, stop;
-      clicked = 0;
-      start = function(e) {
-        var pos;
-        clicked = 1;
-        ctx.beginPath();
-        pos = getMousePos(canvas, e);
-        return ctx.moveTo(pos.x, pos.y);
+  };
+
+  Drawing.prototype.start = function(e) {
+    var p;
+    p = this.getMousePos(e);
+    this.clicked = 1;
+    this.ctx.beginPath();
+    this.ctx.moveTo(p.x, p.y);
+    return this.stroke = [[p.x, p.y]];
+  };
+
+  Drawing.prototype.move = function(e) {
+    var p;
+    if (this.clicked) {
+      p = this.getMousePos(e);
+      this.ctx.lineTo(p.x, p.y);
+      this.ctx.stroke();
+      return this.stroke.push([p.x, p.y]);
+    }
+  };
+
+  Drawing.prototype.stop = function(e) {
+    this.clicked = 0;
+    return this.strokes.push(this.stroke);
+  };
+
+  Drawing.prototype.init = function() {
+    this.ctx.fillStyle = '#FFFFFF';
+    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    this.ctx.lineWidth = 3;
+    this.ctx.lineCap = 'round';
+    $(this.canvas).on('mousedown', (function(_this) {
+      return function(e) {
+        return _this.start(e);
       };
-      move = function(e) {
-        var pos;
-        if (clicked) {
-          pos = getMousePos(canvas, e);
-          ctx.lineTo(pos.x, pos.y);
-          return ctx.stroke();
-        }
+    })(this));
+    $(this.canvas).on('mousemove', (function(_this) {
+      return function(e) {
+        return _this.move(e);
       };
-      stop = function(e) {
-        return clicked = 0;
+    })(this));
+    return $(this.canvas).on('mouseup', (function(_this) {
+      return function(e) {
+        return _this.stop(e);
       };
-      $(canvas).on('mousedown', start);
-      $(canvas).on('mousemove', move);
-      return $(canvas).on('mouseup', stop);
-    };
-    return drawMouse(this.canvas);
+    })(this));
   };
 
   Drawing.prototype.recognize = function() {
-    return alert('recognize');
+    return alert(JSON.stringify(this.strokes));
   };
 
   Drawing.prototype.clean = function() {
-    return alert('clean');
+    this.clicked = 0;
+    this.stroke = [];
+    this.strokes = [];
+    this.ctx.fillStyle = '#FFFFFF';
+    return this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
   };
 
   return Drawing;
