@@ -7,6 +7,7 @@
 		<link rel="stylesheet" href="stylesheets/style.css">
 		<script type="text/javascript" src="javascripts/libs/jquery.js"></script>
 		<script type="text/javascript" src="javascripts/libs/modernizr.js"></script>
+		<script type="text/javascript" src="javascripts/libs/bootstrap.js"></script>
 		<script type="text/javascript" src="javascripts/drawing.js"></script>
 		<script type="text/javascript" src="javascripts/libs/angular.js"></script>
 		<script type="text/javascript" src="javascripts/controllers.js"></script>
@@ -29,11 +30,21 @@
 					</div>
 					<div class="inner cover">
 						<div class="canvas-container">
-							<canvas id="canvas" width="860" height="500"></canvas>
+							<canvas id="canvas" width="860" height="400"></canvas>
 						</div>
-						<div>
-							<button class="btn btn-success">Recognize</button>
-							<button class="btn btn-default">Clean</button>
+						<div class="tabs-container">
+							<ul class="nav nav-tabs">
+								<li class="active"><a href="#preview" data-toggle="tab">Preview</a></li>
+								<li><a href="#latex" data-toggle="tab">Latex</a></li>
+								<li><a href="#mathml" data-toggle="tab">MathML</a></li>
+							</ul>
+							<div class="tab-content">
+								<div class="tab-pane active" id="preview">
+									
+								</div>
+								<div class="tab-pane" id="latex"></div>
+								<div class="tab-pane" id="mathml"></div>
+							</div>	
 						</div>
 					</div>
 				</div>
@@ -44,7 +55,7 @@
 				var drawing = new Drawing($('#canvas'));
 				drawing.draw();
 				//bind buttons
-				
+
 			});
 		</script>
 	</body>

@@ -116,7 +116,7 @@ body {
   font-weight: bold;
 }
 .inner.cover {
-	margin-top: 100px;
+	margin-top: 10px;
 }
 
 /*
@@ -136,7 +136,7 @@ body {
 @media (min-width: 768px) {
   /* Pull out the header and footer */
   .masthead {
-    position: fixed;
+    /* position: fixed; */
     top: 0;
   }
   .mastfoot {
@@ -161,3 +161,16 @@ body {
     width: 900px;
   }
 }
+
+/*
+ * My own stuff
+ */
+.tabs-container {
+	margin-top: 20px;
+}
+
+.tab-pane {
+	min-height: 200px;
+	background-color: white;
+}
+
