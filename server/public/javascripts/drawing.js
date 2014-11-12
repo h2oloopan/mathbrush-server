@@ -49,6 +49,14 @@ Drawing = (function() {
     return drawMouse(this.canvas);
   };
 
+  Drawing.prototype.recognize = function() {
+    return alert('recognize');
+  };
+
+  Drawing.prototype.clean = function() {
+    return alert('clean');
+  };
+
   return Drawing;
 
 })();

@@ -37,3 +37,7 @@ class Drawing
 			$(canvas).on 'mouseup', stop
 
 		drawMouse @canvas
+	recognize: ->
+		alert 'recognize'
+	clean: ->
+		alert 'clean'

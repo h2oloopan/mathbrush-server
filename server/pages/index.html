@@ -32,6 +32,10 @@
 						<div class="canvas-container">
 							<canvas id="canvas" width="860" height="400"></canvas>
 						</div>
+						<div class="buttons-container">
+							<button class="btn btn-success btn-recognize">Recognize</button>
+							<button class="btn btn-default btn-clean">Clean</button>
+						</div>
 						<div class="tabs-container">
 							<ul class="nav nav-tabs">
 								<li class="active"><a href="#preview" data-toggle="tab">Preview</a></li>
@@ -55,7 +59,8 @@
 				var drawing = new Drawing($('#canvas'));
 				drawing.draw();
 				//bind buttons
-
+				$('.btn-recognize').click(drawing.recognize);
+				$('.btn-clean').click(drawing.clean);
 			});
 		</script>
 	</body>
