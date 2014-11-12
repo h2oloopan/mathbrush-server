@@ -1,3 +1,6 @@
+url_recognize = 'api/recognize' 
+
+
 class Drawing
 	constructor: (canvas) ->
 		@canvas = canvas[0]
@@ -39,7 +42,17 @@ class Drawing
 		$(@canvas).on 'mouseup', (e) =>
 			@stop e
 	recognize: ->
-		alert JSON.stringify(@strokes)
+		data = @strokes
+		$.ajax
+			type: 'POST'
+			contentType: 'application/json; charset=utf-8'
+			url: url_recognize
+			data: data
+			dataType: 'json'
+		.done (result) ->
+			alert result
+		.fail (response) ->
+			alert response.responseText
 	clean: ->
 		@clicked = 0
 		@stroke = []

@@ -13,9 +13,8 @@ recognizer.initialize(logger);
 
 exports.bind = function(app) {
   return app.get('/api/recognize/recognize', function(req, res) {
-    var input, result;
-    input = [[[1, 2], [2, 4], [3, 6], [4, 8], [5, 10]], [[7, 10], [9, 13], [15, 63]]];
-    result = recognizer.recognize('pan', input);
+    var result;
+    result = recognizer.recognize('pan', req.body);
     return res.send(200, result);
   });
 };
