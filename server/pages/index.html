@@ -44,10 +44,14 @@
 							</ul>
 							<div class="tab-content">
 								<div class="tab-pane active" id="preview">
-									
+									<div id="preview-content" class="display-content"></div>
 								</div>
-								<div class="tab-pane" id="latex"></div>
-								<div class="tab-pane" id="mathml"></div>
+								<div class="tab-pane" id="latex">
+									<div id="latex-content" class="display-content"></div>
+								</div>
+								<div class="tab-pane" id="mathml">
+									<div id="mathml-content" class="display-content"></div>
+								</div>
 							</div>	
 						</div>
 					</div>
@@ -56,7 +60,7 @@
 		</div>
 		<script type="text/javascript">
 			$(function(){
-				var drawing = new Drawing($('#canvas'));
+				var drawing = new Drawing($('#canvas'), $('#preview-content'), $('#mathml-content'), $('#latex-content'));
 				drawing.init();
 				//bind buttons
 				$('.btn-recognize').click(function() {

@@ -1,9 +1,12 @@
-url_recognize = 'api/recognize' 
+url_recognize = 'api/recognize/recognize' 
 
 
 class Drawing
-	constructor: (canvas) ->
+	constructor: (canvas, preview, mathML, latex) ->
 		@canvas = canvas[0]
+		@previewHolder = preview
+		@mathMLHolder = mathML
+		@latexHolder = latex
 		@ctx = @canvas.getContext '2d'
 		@strokes = []
 		@stroke = []
@@ -42,7 +45,8 @@ class Drawing
 		$(@canvas).on 'mouseup', (e) =>
 			@stop e
 	recognize: ->
-		data = @strokes
+		thiz = @
+		data = JSON.stringify @strokes
 		$.ajax
 			type: 'POST'
 			contentType: 'application/json; charset=utf-8'
@@ -50,9 +54,14 @@ class Drawing
 			data: data
 			dataType: 'json'
 		.done (result) ->
-			alert result
+			mathML = result[0]
+			latex = result[1]
+			thiz.display mathML, latex
 		.fail (response) ->
 			alert response.responseText
+	display: (mathML, latex) ->
+		@mathMLHolder.text mathML
+		@latexHolder.text latex
 	clean: ->
 		@clicked = 0
 		@stroke = []

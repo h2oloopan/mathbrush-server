@@ -92,24 +92,32 @@ Handle<Value> Recognize(const Arguments& args) {
 
 
 	//return mathML
-	std::string result = "";
+	std::string mathML = "";
+	std::string latex = "";
 	if (tree->HasLongForm()) {
 		scg::ExpressionIterator* iterator = tree->CreateLongFormIterator();
 		scg::ExpressionTree* expr = (scg::ExpressionTree*) iterator->next();
 		iterator->release();
 		if (expr != NULL) {
-			result = expr->long_str();
+			mathML = expr->long_str();
+			latex = expr->latex_str();
 			expr->release();
 		}
 	}
 	else {
-		result = tree->long_str();
+		mathML = tree->long_str();
+		latex = tree->latex_str();
 	}
 
-	log("* MathML: " + result);
+	log("* MathML: " + mathML);
+	log("* Latex: " + latex);
 
-	Local<String> mathML = String::New(result.c_str());
-	return scope.Close(mathML);
+	Local<String> mathMLStr = String::New(mathML.c_str());
+	Local<String> latexStr = String::New(latex.c_str());
+	Local<Array> result = Array::New(2);
+	result->Set(0, mathMLStr);
+	result->Set(1, latexStr);
+	return scope.Close(result);
 }
 
 Handle<Value> Initialize(const Arguments& args) {

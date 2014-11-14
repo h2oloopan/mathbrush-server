@@ -8,6 +8,6 @@ logger =
 recognizer.initialize logger
 
 exports.bind = (app) ->
-	app.get '/api/recognize/recognize', (req, res) ->
+	app.post '/api/recognize/recognize', (req, res) ->
 		result = recognizer.recognize 'pan', req.body
 		res.send 200, result

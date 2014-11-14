@@ -12,7 +12,7 @@ logger = {
 recognizer.initialize(logger);
 
 exports.bind = function(app) {
-  return app.get('/api/recognize/recognize', function(req, res) {
+  return app.post('/api/recognize/recognize', function(req, res) {
     var result;
     result = recognizer.recognize('pan', req.body);
     return res.send(200, result);

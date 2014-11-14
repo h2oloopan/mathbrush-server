@@ -176,3 +176,10 @@ body {
 .buttons-container .btn {
   width: 100px;
 }
+
+.tab-content {
+  color: black;
+}
+.tab-content .display-content {
+  padding: 20px;
+}
