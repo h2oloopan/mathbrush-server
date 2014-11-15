@@ -1,0 +1,1 @@
+MathJax.OutputJax["HTML-CSS"].defineImageData({MathJax_Script:{160:[[1,1,0],[1,1,0],[1,1,0],[1,1,0],[1,1,0],[1,1,0],[1,1,0],[1,1,0],[1,1,0],[1,1,0],[1,1,0],[1,1,0],[1,1,0],[1,1,0]]}}),MathJax.Ajax.loadComplete(MathJax.OutputJax["HTML-CSS"].imgDir+"/Script/Regular"+MathJax.OutputJax["HTML-CSS"].imgPacked+"/Other.js");

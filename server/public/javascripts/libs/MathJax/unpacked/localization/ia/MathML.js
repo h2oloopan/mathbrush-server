@@ -1,0 +1,1 @@
+MathJax.Localization.addTranslation("ia","MathML",{version:"2.4.0",isLoaded:!0,strings:{}}),MathJax.Ajax.loadComplete("[MathJax]/localization/ia/MathML.js");

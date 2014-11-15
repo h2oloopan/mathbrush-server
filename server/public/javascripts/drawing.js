@@ -92,7 +92,9 @@ Drawing = (function() {
 
   Drawing.prototype.display = function(mathML, latex) {
     this.mathMLHolder.text(mathML);
-    return this.latexHolder.text(latex);
+    this.latexHolder.text(latex);
+    this.previewHolder.html('$' + latex + '$');
+    return MathJax.Hub.Queue(['Typeset', MathJax.Hub, this.previewHolder[0]]);
   };
 
   Drawing.prototype.clean = function() {
@@ -100,7 +102,10 @@ Drawing = (function() {
     this.stroke = [];
     this.strokes = [];
     this.ctx.fillStyle = '#FFFFFF';
-    return this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    this.previewHolder.html('');
+    this.latexHolder.html('');
+    return this.mathMLHolder.html('');
   };
 
   return Drawing;

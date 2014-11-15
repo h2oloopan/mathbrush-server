@@ -9,8 +9,17 @@
 		<script type="text/javascript" src="javascripts/libs/modernizr.js"></script>
 		<script type="text/javascript" src="javascripts/libs/bootstrap.js"></script>
 		<script type="text/javascript" src="javascripts/drawing.js"></script>
+		<script type="text/javascript" 
+			src="javascripts/libs/MathJax/MathJax.js?config=Tex-AMS-MML_HTMLorMML"></script>
 		<script type="text/javascript" src="javascripts/libs/angular.js"></script>
 		<script type="text/javascript" src="javascripts/controllers.js"></script>
+		<script type="text/x-mathjax-config">
+			MathJax.Hub.Config({
+				showProcessingMessages: false,
+				tex2jax: { inlineMath: [['$','$'],['\\(','\\)']] },
+		    	skipStartupTypeset: true
+			});
+		</script>
 	</head>
 	<body>
 		<div class="site-wrapper">
@@ -35,18 +44,20 @@
 						<div class="buttons-container">
 							<button class="btn btn-success btn-recognize">Recognize</button>
 							<button class="btn btn-default btn-clean">Clean</button>
+							<button class="btn btn-warning btn-dots">Dots</button>
+						</div>
+						<div id="preview">
+							<div class="preview-logo">Preview</div>
+							<div id="preview-content" class="preview-content">
+							</div>
 						</div>
 						<div class="tabs-container">
 							<ul class="nav nav-tabs">
-								<li class="active"><a href="#preview" data-toggle="tab">Preview</a></li>
-								<li><a href="#latex" data-toggle="tab">Latex</a></li>
+								<li class="active"><a href="#latex" data-toggle="tab">Latex</a></li>
 								<li><a href="#mathml" data-toggle="tab">MathML</a></li>
 							</ul>
 							<div class="tab-content">
-								<div class="tab-pane active" id="preview">
-									<div id="preview-content" class="display-content"></div>
-								</div>
-								<div class="tab-pane" id="latex">
+								<div class="tab-pane active" id="latex">
 									<div id="latex-content" class="display-content"></div>
 								</div>
 								<div class="tab-pane" id="mathml">
@@ -68,6 +79,9 @@
 				});
 				$('.btn-clean').click(function() {
 					drawing.clean();
+				});
+				$('.btn-dots').click(function() {
+					drawing.dots();
 				});
 			});
 		</script>

@@ -1,0 +1,1 @@
+MathJax.Hub.Config({config:["MMLorHTML.js"],extensions:["mml2jax.js","MathEvents.js","MathZoom.js","MathMenu.js","toMathML.js"],jax:["input/MathML","output/HTML-CSS","output/NativeMML"]}),MathJax.Ajax.loadComplete("[MathJax]/config/MML_HTMLorMML-full.js");

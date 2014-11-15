@@ -1,0 +1,1 @@
+MathJax.Localization.addTranslation("ko","HelpDialog",{version:"2.4.0",isLoaded:!0,strings:{}}),MathJax.Ajax.loadComplete("[MathJax]/localization/ko/HelpDialog.js");

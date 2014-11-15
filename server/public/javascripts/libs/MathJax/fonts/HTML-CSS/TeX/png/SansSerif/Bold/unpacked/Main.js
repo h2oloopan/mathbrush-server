@@ -1,0 +1,1 @@
+MathJax.OutputJax["HTML-CSS"].defineImageData({"MathJax_SansSerif-bold":{}}),MathJax.Ajax.loadComplete(MathJax.OutputJax["HTML-CSS"].imgDir+"/SansSerif/Bold"+MathJax.OutputJax["HTML-CSS"].imgPacked+"/Main.js");

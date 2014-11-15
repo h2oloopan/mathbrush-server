@@ -62,9 +62,18 @@ class Drawing
 	display: (mathML, latex) ->
 		@mathMLHolder.text mathML
 		@latexHolder.text latex
+		#display true math
+		@previewHolder.html '$' + latex + '$'
+		MathJax.Hub.Queue ['Typeset', MathJax.Hub, @previewHolder[0]]
 	clean: ->
 		@clicked = 0
 		@stroke = []
 		@strokes = []
 		@ctx.fillStyle = '#FFFFFF'
 		@ctx.fillRect 0, 0, @canvas.width, @canvas.height
+		#clean ui
+		@previewHolder.html ''
+		@latexHolder.html ''
+		@mathMLHolder.html ''
+
+

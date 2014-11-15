@@ -170,7 +170,7 @@ body {
 }
 
 .tab-pane {
-	min-height: 200px;
+	min-height: 160px;
 	background-color: white;
 }
 .buttons-container .btn {
@@ -180,6 +180,16 @@ body {
 .tab-content {
   color: black;
 }
+.tab-content .preview-content {
+  padding: 20px;
+}
 .tab-content .display-content {
   padding: 20px;
+}
+
+#preview {
+  min-height: 100px;
+  background-color: white;
+  margin-top: 20px;
+  color: black;
 }

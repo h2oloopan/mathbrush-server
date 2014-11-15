@@ -1,0 +1,1 @@
+MathJax.OutputJax["HTML-CSS"].defineImageData({MathJax_AMS:{}}),MathJax.Ajax.loadComplete(MathJax.OutputJax["HTML-CSS"].imgDir+"/AMS/Regular"+MathJax.OutputJax["HTML-CSS"].imgPacked+"/Main.js");

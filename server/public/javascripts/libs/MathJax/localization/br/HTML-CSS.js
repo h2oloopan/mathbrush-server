@@ -1,0 +1,1 @@
+MathJax.Localization.addTranslation("br","HTML-CSS",{version:"2.4.0",isLoaded:!0,strings:{LoadWebFont:"O kargañ ar font web  %1",CantLoadWebFont:"Ne c'haller ket kargañ ar font web %1",CantFindFontUsing:"Ne c'haller ket kavout ur font dereat e-touez %1"}}),MathJax.Ajax.loadComplete("[MathJax]/localization/br/HTML-CSS.js");
