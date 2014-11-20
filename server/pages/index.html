@@ -40,6 +40,7 @@
 					<div class="inner cover">
 						<div class="canvas-container">
 							<canvas id="canvas" width="860" height="400"></canvas>
+							<canvas id="dots" width="860" height="400" style="display:none;"></canvas>
 						</div>
 						<div class="buttons-container">
 							<button class="btn btn-success btn-recognize">Recognize</button>
@@ -71,7 +72,7 @@
 		</div>
 		<script type="text/javascript">
 			$(function(){
-				var drawing = new Drawing($('#canvas'), $('#preview-content'), $('#mathml-content'), $('#latex-content'));
+				var drawing = new Drawing($('#canvas'), $('#dots'), $('#preview-content'), $('#mathml-content'), $('#latex-content'));
 				drawing.init();
 				//bind buttons
 				$('.btn-recognize').click(function() {
@@ -81,7 +82,7 @@
 					drawing.clean();
 				});
 				$('.btn-dots').click(function() {
-					drawing.dots();
+					drawing.drawDots(this);
 				});
 			});
 		</script>

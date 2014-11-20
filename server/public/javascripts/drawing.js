@@ -4,8 +4,9 @@ var Drawing, url_recognize;
 url_recognize = 'api/recognize/recognize';
 
 Drawing = (function() {
-  function Drawing(canvas, preview, mathML, latex) {
+  function Drawing(canvas, dots, preview, mathML, latex) {
     this.canvas = canvas[0];
+    this.dots = dots[0];
     this.previewHolder = preview;
     this.mathMLHolder = mathML;
     this.latexHolder = latex;
@@ -73,6 +74,8 @@ Drawing = (function() {
   Drawing.prototype.recognize = function() {
     var data, thiz;
     thiz = this;
+    $(this.dots).hide();
+    $(this.canvas).show();
     data = JSON.stringify(this.strokes);
     return $.ajax({
       type: 'POST',
@@ -95,6 +98,45 @@ Drawing = (function() {
     this.latexHolder.text(latex);
     this.previewHolder.html('$' + latex + '$');
     return MathJax.Hub.Queue(['Typeset', MathJax.Hub, this.previewHolder[0]]);
+  };
+
+  Drawing.prototype.drawDots = function(button) {
+    var color, ctx, getRandomColor, point, stroke, x, y, _i, _len, _ref, _results;
+    console.log(e);
+    $(this.canvas).hide();
+    $(this.dots).show();
+    ctx = this.dots.getContext('2d');
+    ctx.fillStyle = '#EEEEEE';
+    ctx.fillRect(0, 0, this.dots.width, this.dots.height);
+    getRandomColor = function() {
+      var color, i, letters, _i;
+      letters = '0123456789ABCDEF'.split('');
+      color = '#';
+      for (i = _i = 0; _i < 6; i = ++_i) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    };
+    _ref = this.strokes;
+    _results = [];
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      stroke = _ref[_i];
+      color = getRandomColor();
+      _results.push((function() {
+        var _j, _len1, _results1;
+        _results1 = [];
+        for (_j = 0, _len1 = stroke.length; _j < _len1; _j++) {
+          point = stroke[_j];
+          x = point[0];
+          y = point[1];
+          console.log(x + ' ' + y);
+          ctx.fillStyle = color;
+          _results1.push(ctx.fillRect(x, y, 10, 10));
+        }
+        return _results1;
+      })());
+    }
+    return _results;
   };
 
   Drawing.prototype.clean = function() {

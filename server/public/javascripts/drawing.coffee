@@ -2,8 +2,9 @@ url_recognize = 'api/recognize/recognize'
 
 
 class Drawing
-	constructor: (canvas, preview, mathML, latex) ->
+	constructor: (canvas, dots, preview, mathML, latex) ->
 		@canvas = canvas[0]
+		@dots = dots[0]
 		@previewHolder = preview
 		@mathMLHolder = mathML
 		@latexHolder = latex
@@ -46,6 +47,8 @@ class Drawing
 			@stop e
 	recognize: ->
 		thiz = @
+		$(@dots).hide()
+		$(@canvas).show()
 		data = JSON.stringify @strokes
 		$.ajax
 			type: 'POST'
@@ -65,6 +68,31 @@ class Drawing
 		#display true math
 		@previewHolder.html '$' + latex + '$'
 		MathJax.Hub.Queue ['Typeset', MathJax.Hub, @previewHolder[0]]
+	drawDots: (button) ->
+		console.log e
+		$(@canvas).hide()
+		$(@dots).show()
+		ctx = @dots.getContext '2d'
+		ctx.fillStyle = '#EEEEEE'
+		ctx.fillRect 0, 0, @dots.width, @dots.height
+
+		#draw the strokes
+		getRandomColor = ->
+			letters = '0123456789ABCDEF'.split ''
+			color = '#'
+			for i in [0...6]
+				color += letters[Math.floor(Math.random() * 16)]
+			return color
+
+		for stroke in @strokes
+			color = getRandomColor()
+			for point in stroke
+				x = point[0]
+				y = point[1]
+				console.log x + ' ' + y
+				ctx.fillStyle = color
+				ctx.fillRect x, y, 10, 10
+
 	clean: ->
 		@clicked = 0
 		@stroke = []
