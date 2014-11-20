@@ -69,7 +69,6 @@ class Drawing
 		@previewHolder.html '$' + latex + '$'
 		MathJax.Hub.Queue ['Typeset', MathJax.Hub, @previewHolder[0]]
 	drawDots: (button) ->
-		console.log e
 		$(@canvas).hide()
 		$(@dots).show()
 		ctx = @dots.getContext '2d'
@@ -89,9 +88,9 @@ class Drawing
 			for point in stroke
 				x = point[0]
 				y = point[1]
-				console.log x + ' ' + y
+				#console.log x + ' ' + y
 				ctx.fillStyle = color
-				ctx.fillRect x, y, 10, 10
+				ctx.fillRect x, y, 5, 5
 
 	clean: ->
 		@clicked = 0

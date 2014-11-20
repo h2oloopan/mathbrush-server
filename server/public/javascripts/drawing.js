@@ -102,7 +102,6 @@ Drawing = (function() {
 
   Drawing.prototype.drawDots = function(button) {
     var color, ctx, getRandomColor, point, stroke, x, y, _i, _len, _ref, _results;
-    console.log(e);
     $(this.canvas).hide();
     $(this.dots).show();
     ctx = this.dots.getContext('2d');
@@ -129,9 +128,8 @@ Drawing = (function() {
           point = stroke[_j];
           x = point[0];
           y = point[1];
-          console.log(x + ' ' + y);
           ctx.fillStyle = color;
-          _results1.push(ctx.fillRect(x, y, 10, 10));
+          _results1.push(ctx.fillRect(x, y, 5, 5));
         }
         return _results1;
       })());
